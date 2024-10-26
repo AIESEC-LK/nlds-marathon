@@ -154,9 +154,9 @@ def display_score_ranks(df):
 
     # Apply gold, silver, and bronze medals to the 'Entity' column
     df_with_ranks['Entity'] = df_with_ranks.apply(lambda row:
-                                                  f"🥇 {row['Entity']}" if (row['Rank'] == 1 and row['Total Points'] !=0) else
-                                                  f"🥈 {row['Entity']}" if (row['Rank'] == 2 and row['Total Points'] !=0) else
-                                                  f"🥉 {row['Entity']}" if (row['Rank'] == 3 and row['Total Points'] !=0)else
+                                                  f"🥇 {row['Entity']}" if (row['Rank'] == 1 and row['Total'] !=0) else
+                                                  f"🥈 {row['Entity']}" if (row['Rank'] == 2 and row['Total'] !=0) else
+                                                  f"🥉 {row['Entity']}" if (row['Rank'] == 3 and row['Total'] !=0) else
                                                   row['Entity'], axis=1)
 
     # display the leaderboard section
