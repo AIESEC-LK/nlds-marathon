@@ -210,30 +210,17 @@ def display_leaderboard_table(df):
     df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
 
     # Apply custom CSS for font sizes similar to bar chart fonts
-    st.markdown(
-        """
-        <style>
-        /* Set general table font size */
-        .dataframe-table {
-            font-size: 14px;
+    # Apply styling to increase font size
+    styled_df = df.style.set_properties(
+        **{
+            'font-size': '14px',  # Set general font size
+            'text-align': 'center'
         }
-        /* Style the header font size and alignment */
-        .dataframe-table thead th {
-            font-size: 16px;
-            text-align: center;
-        }
-        /* Style the row font size */
-        .dataframe-table tbody td {
-            font-size: 14px;
-        }
-        /* Style the rank column to be bold and larger */
-        .dataframe-table tbody td:nth-child(1) {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        </style>
-        """, unsafe_allow_html=True
-    )
+    ).set_table_styles([
+        {'selector': 'thead th', 'props': [('font-size', '16px'), ('text-align', 'center')]},
+        {'selector': 'tbody td', 'props': [('font-size', '14px'), ('text-align', 'center')]},
+        {'selector': 'tbody td:nth-child(1)', 'props': [('font-size', '18px'), ('font-weight', 'bold')]}  # Bold and larger for Rank column
+    ])
 
     st.dataframe(df.set_index('Rank'), use_container_width=True, height=250)
 # Main Streamlit app
