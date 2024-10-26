@@ -208,7 +208,7 @@ def main():
     ## The Dashboard Title (You can change here)
     st.title("Transcend Hackathon - Dashboard")
 
-    st_autorefresh(interval=5 * 60 * 1000, key="data_refresh")  # Set interval to 5 minutes
+    st_autorefresh(interval=1 * 60 * 1000, key="data_refresh")  # Set interval to 5 minutes
     # URL to your Google Sheets data
     ## Datasource url / Google Sheets CSV
     sheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXOP09TlmTmfTCx5x7Dwgm8s80W4z7m9plWqbZ7Lfodxox-26BoTNDq-tozEQylR7jKa3UbtIjU1I1/pub?gid=1562137798&single=true&output=csv"
@@ -255,6 +255,7 @@ def main():
                 
             st.subheader('Leaderboard')
 
+            # Display the leaderboard table
             display_leaderboard_table(df_combined)
 
             st.plotly_chart(fig_approved, use_container_width=True)
