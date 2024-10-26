@@ -266,7 +266,13 @@ def main():
     )   
 
     ## The Dashboard Title (You can change here)
-    st.title("Transcend Hackathon - Dashboard")
+    #st.title("Transcend Hackathon - Dashboard")
+
+    col1, col2 = st.columns([4, 10])
+    with col1:
+        st.image(icon_path)
+    with col2:
+        st.title("Hackathon - Dashboard")
 
     st_autorefresh(interval=1 * 60 * 1000, key="data_refresh")  # Set interval to 5 minutes
     # URL to your Google Sheets data
