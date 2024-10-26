@@ -141,9 +141,9 @@ def display_approval_ranks(df):
     #display the leaderboard section
     display_leaderboard(df_with_ranks, tot_ap_approvals)
 
-def display_score_ranks(df_with_ranks):
+def display_score_ranks(df):
     # Calculate ranks based on scores
-    # df_with_ranks = calculate_ranks_on_score(df)
+    df_with_ranks = calculate_ranks_on_score(df)
     
     # Drop the index column
     # df_without_index = df_with_ranks[['Rank', 'Entity', 'Total']]
@@ -202,10 +202,10 @@ def total_points_and_ranks(data):
 
     # Use the function to display the ranks table
     # display_approval_ranks(df_entity_approved_total)
-    df_ranks = calculate_ranks_on_score(df_entity_points_total)
+    # df_ranks = display_score_ranks(df_entity_points_total)
 
-    return df_ranks
-    # return df_entity_points_total
+    # return df_ranks
+    return df_entity_points_total
 
 # Main Streamlit app
 def main():
