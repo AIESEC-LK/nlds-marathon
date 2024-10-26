@@ -63,6 +63,18 @@ def calculate_total_approved(df):
             entity_approved_total[entity] += approved
     return entity_approved_total
 
+# Function to calculate the total points of each entity
+def calulate_total_points(df):
+    entity_sum = {}
+    for index, row in df.iterrows():
+        entity = row['Entity']
+        total = row['Total']
+        if entity not in entity_sum:
+            entity_sum[entity] = total
+        else:
+            entity_sum[entity] += total
+    return entity_sum
+
 # Function to calculate the count of 'Applied' related to each entity based on the selected function
 def count_applied_by_entity(df, selected_function):
     filtered_df = df[df['Function'] == selected_function]
@@ -87,11 +99,23 @@ def calculate_approval_ranks(df):
     
     return df_sorted
 
-def display_leaderboard(df, total_approvals):
+def calculate_ranks_on_score(df):
+    # Sort the DataFrame by 'Total' column in descending order
+    df_sorted = df.sort_values(by='Total', ascending=False)
+    # Add a new column 'Rank' to store the ranks
+    df_sorted['Rank'] = range(1, len(df_sorted) + 1)
     
+    return df_sorted
+
+def display_leaderboard(df, total_approvals, total_applications):
+
+    # Rename the column 'Total' to 'Total Points'
+    df.rename(columns={'Total': 'Total Points'}, inplace=True)
+    df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
+    df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
     
     # Define a layout with two columns
-    col1, col2 = st.columns([4, 1])
+    col1, col2, col3 = st.columns([3, 1, 1])
 
     # Display the total approvals in the first column
     with col1:
@@ -101,11 +125,15 @@ def display_leaderboard(df, total_approvals):
     with col2:
         # st.metric(label="Total AP Approvals", value=total_approvals)
         # st.button(f"Total AP Approvals : **{total_approvals}**", key="no_action_button")
-        st.metric(label="Total AP Approvals", value=total_approvals)
+        st.metric(label="Total Approvals", value=total_approvals)
+    
+    with col3:
+        st.metric(label="Total Applications", value=total_applications)
+
     st.dataframe(df.set_index('Rank'), use_container_width=True, height=250)
 
 def display_approval_ranks(df):
-    # Calculate ranks
+    # Calculate ranks based on approvals
     df_with_ranks = calculate_approval_ranks(df)
     
     # Drop the index column
@@ -127,6 +155,70 @@ def display_approval_ranks(df):
     #display the leaderboard section
     display_leaderboard(df_with_ranks, tot_ap_approvals)
 
+def display_score_ranks(df):
+    # Calculate ranks based on scores
+    df_with_ranks = calculate_ranks_on_score(df)
+    
+    # Drop the index column
+    df_without_index = df_with_ranks[['Rank', 'Entity', 'Total']]
+
+    # Apply gold, silver, and bronze medals to the 'Entity' column
+    df_with_ranks['Entity'] = df_with_ranks.apply(lambda row: 
+                                                   f"🥇 {row['Entity']}" if row['Rank'] == 1 else 
+                                                   f"🥈 {row['Entity']}" if row['Rank'] == 2 else 
+                                                   f"🥉 {row['Entity']}" if row['Rank'] == 3 else 
+                                                   row['Entity'], axis=1)
+    
+    # Calculate the total of the 'Total Points' column
+    # tot_points = df_with_ranks['Total Points'].sum()
+
+    #display the leaderboard section
+    return df_with_ranks
+    # display_leaderboard(df_with_ranks)
+
+def applied_bar_chart_and_data(data):
+    # Calculate total 'Applied' related to each entity
+    entity_applied_total = calculate_total_applied(data)
+
+    # Convert dictionary to DataFrame
+    df_entity_applied_total = pd.DataFrame.from_dict(entity_applied_total, orient='index', columns=['Total_Applied'])
+    df_entity_applied_total.reset_index(inplace=True)
+    df_entity_applied_total.rename(columns={'index': 'Entity'}, inplace=True)
+    
+    # Create a colored bar chart using Plotly Express
+    fig_applied = px.bar(df_entity_applied_total, x='Entity', y='Total_Applied', title='Total Applications by Entity', labels={'Entity': 'Entity', 'Total_Applied': 'Applications'}, color='Entity')
+
+    # Hide the legend
+    fig_applied.update_layout(showlegend=False)
+
+    return fig_applied, df_entity_applied_total
+
+def approved_bar_chart_and_data(data):
+    # Calculate total 'Approved' related to each entity
+    entity_approved_total = calculate_total_approved(data)
+
+    # Convert dictionary to DataFrame
+    df_entity_approved_total = pd.DataFrame.from_dict(entity_approved_total, orient='index', columns=['Total_Approved'])
+    df_entity_approved_total.reset_index(inplace=True)
+    df_entity_approved_total.rename(columns={'index': 'Entity'}, inplace=True)
+    # Create a colored bar chart using Plotly Express
+    fig_approved = px.bar(df_entity_approved_total, x='Entity', y='Total_Approved', title='Total Approvals by Entity', labels={'Entity': 'Entity', 'Total_Approved': 'Approvals'},color='Entity')
+    # Hide the legend
+    fig_approved.update_layout(showlegend=False)
+
+    return fig_approved, df_entity_approved_total
+
+def total_points_and_ranks(data):
+    entity_points_total = calulate_total_points(data)
+    df_entity_points_total = pd.DataFrame.from_dict(entity_points_total, orient='index', columns=['Total'])
+    df_entity_points_total.reset_index(inplace=True)
+    df_entity_points_total.rename(columns={'index': 'Entity'}, inplace=True)
+
+    # Use the function to display the ranks table
+    # display_approval_ranks(df_entity_approved_total)
+    df_ranks = display_score_ranks(df_entity_points_total)
+
+    return df_ranks
 
 # Main Streamlit app
 def main():
@@ -153,37 +245,21 @@ def main():
         # Check if the 'Entity' column exists in the DataFrame
         if 'Entity' in data.columns:
 
-            # Calculate total 'Applied' related to each entity
-            entity_applied_total = calculate_total_applied(data)
+            # calculation of leaderboard items
+            fig_applied, df_entity_applied_total = applied_bar_chart_and_data(data)
+            fig_approved, df_entity_approved_total = approved_bar_chart_and_data(data)
+            df_ranks = total_points_and_ranks(data)
 
-            # Convert dictionary to DataFrame
-            df_entity_applied_total = pd.DataFrame.from_dict(entity_applied_total, orient='index', columns=['Total_Applied'])
-            df_entity_applied_total.reset_index(inplace=True)
-            df_entity_applied_total.rename(columns={'index': 'Entity'}, inplace=True)
-            
-            # Create a colored bar chart using Plotly Express
-            fig = px.bar(df_entity_applied_total, x='Entity', y='Total_Applied', title='Total Applications by Entity', labels={'Entity': 'Entity', 'Total_Applied': 'Applications'}, color='Entity')
+            # df_combined = pd.concat(df_ranks, df_entity_applied_total, df_entity_approved_total, on='Entity')
+            # df_combined = df_ranks.merge(df_entity_applied_total, on='Entity').merge(df_entity_approved_total, on='Entity')
+            df_combined = df_entity_applied_total.merge(df_entity_approved_total, on='Entity').merge(df_ranks, on='Entity')
 
-            # Hide the legend
-            fig.update_layout(showlegend=False)
-
-            # Use the function to display the ranks table
-            
-            # Calculate total 'Approved' related to each entity
-            entity_approved_total = calculate_total_approved(data)
-
-            # Convert dictionary to DataFrame
-            df_entity_approved_total = pd.DataFrame.from_dict(entity_approved_total, orient='index', columns=['Total_Approved'])
-            df_entity_approved_total.reset_index(inplace=True)
-            df_entity_approved_total.rename(columns={'index': 'Entity'}, inplace=True)
-            display_approval_ranks(df_entity_approved_total)
-            # Create a colored bar chart using Plotly Express
-            fig_approved = px.bar(df_entity_approved_total, x='Entity', y='Total_Approved', title='Total Approvals by Entity', labels={'Entity': 'Entity', 'Total_Approved': 'Approvals'},color='Entity')
-            # Hide the legend
-            fig_approved.update_layout(showlegend=False)
+            display_leaderboard(df_combined, df_combined['Total_Approved'].sum(), df_combined['Total_Applied'].sum())
 
             st.plotly_chart(fig_approved, use_container_width=True)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig_applied, use_container_width=True)
+
+            ###############################################################################
 
             st.subheader('Functional Analysis')
             # Create a select box to choose the 'Function'
