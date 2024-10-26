@@ -268,7 +268,7 @@ def main():
     ## The Dashboard Title (You can change here)
     #st.title("Transcend Hackathon - Dashboard")
 
-    col1, col2 = st.columns([4, 10])
+    col1, col2 = st.columns([2, 12])
     with col1:
         st.image(icon_path)
     with col2:
