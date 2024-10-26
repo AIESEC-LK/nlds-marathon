@@ -205,9 +205,10 @@ def display_leaderboard_table(df):
         """
     <style>
     th, td {
-        font-size: 16px !important;
+        font-size: 20px !important;
         padding: 10px; /* Add padding for better spacing */
         text-align: center; /* Center-align text */
+        font-weight: 900;
     }
     table {
         width: 100%; /* Full width */
@@ -215,7 +216,7 @@ def display_leaderboard_table(df):
     }
     th {
         background-color: #FCFCFC; /* Light gray background for headers */
-        border: 1px solid #ddd; /* Add borders to header */
+        border: 5px solid #ddd; /* Add borders to header */
     }
     td {
         border: 1px solid #ddd; /* Add borders to cells */
