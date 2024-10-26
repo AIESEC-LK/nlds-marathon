@@ -107,17 +107,6 @@ def calculate_ranks_on_score(df):
     
     return df_sorted
 
-def display_leaderboard_table(df):
-
-    df = display_score_ranks(df)
-    
-    # Rename the column 'Total' to 'Total Points'
-    df.rename(columns={'Total': 'Total Points'}, inplace=True)
-    df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
-    df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
-
-    st.dataframe(df.set_index('Rank'), use_container_width=True, height=250)
-
 def display_approval_ranks(df):
     # Calculate ranks based on approvals
     df_with_ranks = calculate_approval_ranks(df)
@@ -139,14 +128,11 @@ def display_approval_ranks(df):
     tot_ap_approvals = df_with_ranks['Total Approvals'].sum()
 
     #display the leaderboard section
-    display_leaderboard(df_with_ranks, tot_ap_approvals)
+    display_leaderboard_table(df_with_ranks, tot_ap_approvals)
 
 def display_score_ranks(df):
     # Calculate ranks based on scores
     df_with_ranks = calculate_ranks_on_score(df)
-    
-    # Drop the index column
-    # df_without_index = df_with_ranks[['Rank', 'Entity', 'Total']]
 
     # Apply gold, silver, and bronze medals to the 'Entity' column
     df_with_ranks['Entity'] = df_with_ranks.apply(lambda row: 
@@ -154,13 +140,9 @@ def display_score_ranks(df):
                                                    f"🥈 {row['Entity']}" if row['Rank'] == 2 else 
                                                    f"🥉 {row['Entity']}" if row['Rank'] == 3 else 
                                                    row['Entity'], axis=1)
-    
-    # Calculate the total of the 'Total Points' column
-    # tot_points = df_with_ranks['Total Points'].sum()
 
     #display the leaderboard section
     return df_with_ranks
-    # display_leaderboard(df_with_ranks)
 
 def applied_bar_chart_and_data(data):
     # Calculate total 'Applied' related to each entity
@@ -194,19 +176,26 @@ def approved_bar_chart_and_data(data):
 
     return fig_approved, df_entity_approved_total
 
-def total_points_and_ranks(data):
+def total_points(data):
     entity_points_total = calulate_total_points(data)
     df_entity_points_total = pd.DataFrame.from_dict(entity_points_total, orient='index', columns=['Total'])
     df_entity_points_total.reset_index(inplace=True)
     df_entity_points_total.rename(columns={'index': 'Entity'}, inplace=True)
 
-    # Use the function to display the ranks table
-    # display_approval_ranks(df_entity_approved_total)
-    # df_ranks = display_score_ranks(df_entity_points_total)
-
     # return df_ranks
     return df_entity_points_total
 
+def display_leaderboard_table(df):
+
+    # Calculate ranks based on scores
+    df = display_score_ranks(df)
+    
+    # Rename the column 'Total' to 'Total Points'
+    df.rename(columns={'Total': 'Total Points'}, inplace=True)
+    df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
+    df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
+
+    st.dataframe(df.set_index('Rank'), use_container_width=True, height=250)
 # Main Streamlit app
 def main():
     st.set_page_config(
@@ -235,7 +224,7 @@ def main():
             # calculation of leaderboard items
             fig_applied, df_entity_applied_total = applied_bar_chart_and_data(data)
             fig_approved, df_entity_approved_total = approved_bar_chart_and_data(data)
-            df_ranks = total_points_and_ranks(data)
+            df_ranks = total_points(data)
 
             # df_combined = pd.concat(df_ranks, df_entity_applied_total, df_entity_approved_total, on='Entity')
             # df_combined = df_ranks.merge(df_entity_applied_total, on='Entity').merge(df_entity_approved_total, on='Entity')
@@ -246,11 +235,25 @@ def main():
 
             # Display the total approvals in the first column
             with col1:
-                st.metric(label="Total Approvals", value=df_entity_approved_total['Total_Approved'].sum())
+                # st.metric(label="Total Approvals", value=df_entity_approved_total['Total_Approved'].sum())
+                st.markdown(
+                    "<div style='text-align: center;'>"
+                    f"<h3>Total Approvals</h3>"
+                    f"<p style='font-size: 24px;'>{df_entity_approved_total['Total_Approved'].sum()}</p>"
+                    "</div>",
+                    unsafe_allow_html=True,
+                )
 
             # Display the leaderboard in the second column
             with col2:
-                st.metric(label="Total Applications", value=df_entity_applied_total['Total_Applied'].sum())
+                # st.metric(label="Total Applications", value=df_entity_applied_total['Total_Applied'].sum())
+                st.markdown(
+                    "<div style='text-align: center;'>"
+                    f"<h3>Total Applications</h3>"
+                    f"<p style='font-size: 24px;'>{df_entity_applied_total['Total_Applied'].sum()}</p>"
+                    "</div>",
+                    unsafe_allow_html=True,
+                )
                 
             st.subheader('Leaderboard')
 
