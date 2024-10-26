@@ -158,11 +158,11 @@ def applied_bar_chart_and_data(data):
 
     # Hide the legend
     fig_applied.update_layout(
-    title_font=dict(size=20, color="#31333F),  # Title font size
-    xaxis_title_font=dict(size=16, color="#31333F),  # X-axis title font size
-    yaxis_title_font=dict(size=16, color="#31333F),  # Y-axis title font size
-    xaxis_tickfont=dict(size=14, color="#31333F),  # X-axis tick font size
-    yaxis_tickfont=dict(size=14, color="#31333F),  # Y-axis tick font size
+    title_font=dict(size=20, color="#31333F"),  # Title font size
+    xaxis_title_font=dict(size=16, color="#31333F"),  # X-axis title font size
+    yaxis_title_font=dict(size=16, color="#31333F"),  # Y-axis title font size
+    xaxis_tickfont=dict(size=14, color="#31333F"),  # X-axis tick font size
+    yaxis_tickfont=dict(size=14, color="#31333F"),  # Y-axis tick font size
     showlegend=False
 )
 
