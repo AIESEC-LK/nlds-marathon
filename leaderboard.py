@@ -199,7 +199,7 @@ def display_leaderboard_table(df):
 # Main Streamlit app
 def main():
     st.set_page_config(
-    layout="centered",
+    layout="wide",
     ## You can change the page title here
     page_title="Transcend Hackathon - Dashboard",
     page_icon= icon_path,
