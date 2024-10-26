@@ -111,8 +111,10 @@ def display_leaderboard(df):
 
     # Rename the column 'Total' to 'Total Points'
     df.rename(columns={'Total': 'Total Points'}, inplace=True)
-    # df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
-    # df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
+    df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
+    df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
+
+    df['Rank'] = display_score_ranks(df['Total Points'])
     
     # Define a layout with two columns
     # col1, col2, col3 = st.columns([3, 1, 1])
@@ -216,9 +218,10 @@ def total_points_and_ranks(data):
 
     # Use the function to display the ranks table
     # display_approval_ranks(df_entity_approved_total)
-    df_ranks = display_score_ranks(df_entity_points_total)
+    # df_ranks = display_score_ranks(df_entity_points_total)
 
-    return df_ranks
+    # return df_ranks
+    return df_entity_points_total
 
 # Main Streamlit app
 def main():
@@ -252,7 +255,7 @@ def main():
 
             # df_combined = pd.concat(df_ranks, df_entity_applied_total, df_entity_approved_total, on='Entity')
             # df_combined = df_ranks.merge(df_entity_applied_total, on='Entity').merge(df_entity_approved_total, on='Entity')
-            # df_combined = df_entity_applied_total.merge(df_entity_approved_total, on='Entity').merge(df_ranks, on='Entity')
+            df_combined = df_entity_applied_total.merge(df_entity_approved_total, on='Entity').merge(df_ranks, on='Entity')
 
             # Define a layout with two columns
             col1, col2 = st.columns([1,1])
@@ -267,7 +270,7 @@ def main():
                 
             st.subheader('Leaderboard')
 
-            display_leaderboard(df_ranks)
+            display_leaderboard(df_combined)
 
             st.plotly_chart(fig_approved, use_container_width=True)
             st.plotly_chart(fig_applied, use_container_width=True)
