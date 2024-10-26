@@ -214,7 +214,7 @@ def display_leaderboard_table(df):
         border-collapse: collapse; /* Collapse borders */
     }
     th {
-        background-color: #06060E; /* Light gray background for headers */
+        background-color: #FCFCFC; /* Light gray background for headers */
         border: 1px solid #ddd; /* Add borders to header */
     }
     td {
