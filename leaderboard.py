@@ -21,7 +21,6 @@ def load_data(sheet_url):
 
 # Function to create a bar chart based on the specified metric
 
-
 def create_bar_chart_seperate(df, entity, metric, title):
     filtered_df = df[df['Entity'] == entity]
     fig = px.bar(filtered_df, x='Function', y=metric, title=title, labels={
@@ -29,7 +28,6 @@ def create_bar_chart_seperate(df, entity, metric, title):
     return fig
 
 # Function to create a bar chart based on the total points of each entity
-
 
 def create_bar_chart(entity_sum):
     # Convert entity sum dictionary to DataFrame
@@ -50,7 +48,6 @@ def create_bar_chart(entity_sum):
 
 # Function to calculate the total 'Applied' related to each entity
 
-
 def calculate_total_applied(df):
     entity_applied_total = {}
     for index, row in df.iterrows():
@@ -63,7 +60,6 @@ def calculate_total_applied(df):
     return entity_applied_total
 
 # Function to calculate the total 'Approved' related to each entity
-
 
 def calculate_total_approved(df):
     entity_approved_total = {}
@@ -78,7 +74,6 @@ def calculate_total_approved(df):
 
 # Function to calculate the total points of each entity
 
-
 def calulate_total_points(df):
     entity_sum = {}
     for index, row in df.iterrows():
@@ -92,7 +87,6 @@ def calulate_total_points(df):
 
 # Function to calculate the count of 'Applied' related to each entity based on the selected function
 
-
 def count_applied_by_entity(df, selected_function):
     filtered_df = df[df['Function'] == selected_function]
     applied_counts = filtered_df.groupby(
@@ -102,7 +96,6 @@ def count_applied_by_entity(df, selected_function):
 
 # Function to calculate the count of 'Approved' related to each entity based on the selected function
 
-
 def count_approved_by_entity(df, selected_function):
     filtered_df = df[df['Function'] == selected_function]
     approved_counts = filtered_df.groupby(
@@ -111,9 +104,7 @@ def count_approved_by_entity(df, selected_function):
         columns={'Approved': 'Count_Approved'}, inplace=True)
     return approved_counts
 
-
 icon_path = 'https://lh3.googleusercontent.com/d/19CS85s1g6wqAdHJ-JBL_nEoaE1rzgK9C'
-
 
 def calculate_approval_ranks(df):
     # Sort the DataFrame by 'Total_Approved' column in descending order
@@ -133,7 +124,7 @@ def calculate_ranks_on_score(df):
     return df_sorted
 
 
-def display_approval_ranks(df):
+#def display_approval_ranks(df):
     # Calculate ranks based on approvals
     df_with_ranks = calculate_approval_ranks(df)
 
@@ -279,8 +270,7 @@ def display_leaderboard_table(df):
 
     # Specify the order of columns explicitly
     # Make sure that the columns listed here match your DataFrame
-    columns_order = ['Rank', 'Entity', 'Total Points',
-                     'Total Approvals', 'Total Applications']
+    columns_order = ['Rank', 'Entity', 'Total Applications', 'Total Approvals', 'Total Points',]
 
     # Check if all specified columns exist in the DataFrame
     for col in columns_order:
@@ -337,10 +327,8 @@ def main():
         if 'Entity' in data.columns:
 
             # calculation of leaderboard items
-            fig_applied, df_entity_applied_total = applied_bar_chart_and_data(
-                data)
-            fig_approved, df_entity_approved_total = approved_bar_chart_and_data(
-                data)
+            fig_applied, df_entity_applied_total = applied_bar_chart_and_data(data)
+            fig_approved, df_entity_approved_total = approved_bar_chart_and_data(data)
             df_ranks = total_points(data)
 
             # df_combined = pd.concat(df_ranks, df_entity_applied_total, df_entity_approved_total, on='Entity')
