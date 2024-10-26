@@ -180,11 +180,11 @@ def approved_bar_chart_and_data(data):
     fig_approved = px.bar(df_entity_approved_total, x='Entity', y='Total_Approved', title='Total Approvals by Entity', labels={'Entity': 'Entity', 'Total_Approved': 'Approvals'},color='Entity')
     # Hide the legend
     fig_approved.update_layout(
-    title_font=dict(size=20),  # Title font size
-    xaxis_title_font=dict(size=16),  # X-axis title font size
-    yaxis_title_font=dict(size=16),  # Y-axis title font size
-    xaxis_tickfont=dict(size=14),  # X-axis tick font size
-    yaxis_tickfont=dict(size=14),  # Y-axis tick font size
+    title_font=dict(size=20, family="Arial Black", color="black"),  # Title font size
+    xaxis_title_font=dict(size=16, family="Arial Black", color="black"),  # X-axis title font size
+    yaxis_title_font=dict(size=16, family="Arial Black", color="black"),  # Y-axis title font size
+    xaxis_tickfont=dict(size=14, family="Arial Black", color="black"),  # X-axis tick font size
+    yaxis_tickfont=dict(size=14, family="Arial Black", color="black"),  # Y-axis tick font size
     showlegend=False
 )
 
