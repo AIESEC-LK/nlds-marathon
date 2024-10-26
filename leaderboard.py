@@ -209,14 +209,6 @@ def display_leaderboard_table(df):
     df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
     df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
 
-    # Apply custom CSS for font sizes similar to bar chart fonts
-    # Apply styling to increase font size
-    styled_df = df.style.set_properties().set_table_styles([
-        {'selector': 'thead th', 'props': [('font-size', '26px')]},
-        {'selector': 'tbody td', 'props': [('font-size', '24px')]},
-        {'selector': 'tbody td:nth-child(1)', 'props': [('font-size', '28px')]}  # Bold and larger for Rank column
-    ])
-
     st.dataframe(df.set_index('Rank'), use_container_width=True, height=250)
 # Main Streamlit app
 def main():
