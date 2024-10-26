@@ -107,7 +107,7 @@ def calculate_ranks_on_score(df):
     
     return df_sorted
 
-def display_leaderboard(df):
+def display_leaderboard_table(df):
 
     df = display_score_ranks(df)
     
@@ -115,22 +115,6 @@ def display_leaderboard(df):
     df.rename(columns={'Total': 'Total Points'}, inplace=True)
     df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
     df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
-
-    # Define a layout with two columns
-    # col1, col2, col3 = st.columns([3, 1, 1])
-
-    # # Display the total approvals in the first column
-    # with col1:
-    #     st.subheader('Leaderboard')
-
-    # # Display the leaderboard in the second column
-    # with col2:
-    #     # st.metric(label="Total AP Approvals", value=total_approvals)
-    #     # st.button(f"Total AP Approvals : **{total_approvals}**", key="no_action_button")
-    #     st.metric(label="Total Approvals", value=total_approvals)
-    
-    # with col3:
-    #     st.metric(label="Total Applications", value=total_applications)
 
     st.dataframe(df.set_index('Rank'), use_container_width=True, height=250)
 
@@ -157,9 +141,9 @@ def display_approval_ranks(df):
     #display the leaderboard section
     display_leaderboard(df_with_ranks, tot_ap_approvals)
 
-def display_score_ranks(df):
+def display_score_ranks(df_with_ranks):
     # Calculate ranks based on scores
-    df_with_ranks = calculate_ranks_on_score(df)
+    # df_with_ranks = calculate_ranks_on_score(df)
     
     # Drop the index column
     # df_without_index = df_with_ranks[['Rank', 'Entity', 'Total']]
@@ -218,10 +202,10 @@ def total_points_and_ranks(data):
 
     # Use the function to display the ranks table
     # display_approval_ranks(df_entity_approved_total)
-    # df_ranks = display_score_ranks(df_entity_points_total)
+    df_ranks = calculate_ranks_on_score(df_entity_points_total)
 
-    # return df_ranks
-    return df_entity_points_total
+    return df_ranks
+    # return df_entity_points_total
 
 # Main Streamlit app
 def main():
@@ -270,7 +254,7 @@ def main():
                 
             st.subheader('Leaderboard')
 
-            display_leaderboard(df_combined)
+            display_leaderboard_table(df_combined)
 
             st.plotly_chart(fig_approved, use_container_width=True)
             st.plotly_chart(fig_applied, use_container_width=True)
