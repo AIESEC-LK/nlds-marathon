@@ -209,7 +209,7 @@ def display_leaderboard_table(df):
     df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
     df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
 
-    st.dataframe(df.set_index('Rank'), use_container_width=True, height=500)
+    st.dataframe(df.set_index('Rank'), use_container_width=True, height=300)
 # Main Streamlit app
 def main():
     st.set_page_config(
