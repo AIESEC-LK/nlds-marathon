@@ -109,8 +109,7 @@ def calculate_ranks_on_score(df):
 
 def display_leaderboard(df):
 
-
-    df['Rank'] = display_score_ranks(df)
+    df = display_score_ranks(df)
     
     # Rename the column 'Total' to 'Total Points'
     df.rename(columns={'Total': 'Total Points'}, inplace=True)
