@@ -235,22 +235,20 @@ def main():
 
             # Display the total approvals in the first column
             with col1:
-                # st.metric(label="Total Approvals", value=df_entity_approved_total['Total_Approved'].sum())
                 st.markdown(
                     "<div style='text-align: center;'>"
                     f"<h3>Total Approvals</h3>"
-                    f"<p style='font-size: 24px;'>{df_entity_approved_total['Total_Approved'].sum()}</p>"
+                    f"<p style='font-size: 32px;'>{df_entity_approved_total['Total_Approved'].sum()}</p>"
                     "</div>",
                     unsafe_allow_html=True,
                 )
 
             # Display the leaderboard in the second column
             with col2:
-                # st.metric(label="Total Applications", value=df_entity_applied_total['Total_Applied'].sum())
                 st.markdown(
                     "<div style='text-align: center;'>"
                     f"<h3>Total Applications</h3>"
-                    f"<p style='font-size: 24px;'>{df_entity_applied_total['Total_Applied'].sum()}</p>"
+                    f"<p style='font-size: 32px;'>{df_entity_applied_total['Total_Applied'].sum()}</p>"
                     "</div>",
                     unsafe_allow_html=True,
                 )
