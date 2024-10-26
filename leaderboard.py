@@ -200,16 +200,62 @@ def total_points(data):
     return df_entity_points_total
 
 def display_leaderboard_table(df):
+    # Apply custom CSS for styling
+    st.markdown(
+        """
+    <style>
+    th, td {
+        font-size: 16px !important;
+        padding: 10px; /* Add padding for better spacing */
+        text-align: center; /* Center-align text */
+    }
+    table {
+        width: 100%; /* Full width */
+        border-collapse: collapse; /* Collapse borders */
+    }
+    th {
+        background-color: #06060E; /* Light gray background for headers */
+        border: 1px solid #ddd; /* Add borders to header */
+    }
+    td {
+        border: 1px solid #ddd; /* Add borders to cells */
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
     # Calculate ranks based on scores
-    df = display_score_ranks(df)
-    
-    # Rename the column 'Total' to 'Total Points'
-    df.rename(columns={'Total': 'Total Points'}, inplace=True)
-    df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
-    df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
+    df_with_ranks = display_score_ranks(df)
 
-    st.dataframe(df.set_index('Rank'), use_container_width=True, height=300)
+    # Rename the columns for better readability
+    df_with_ranks.rename(columns={
+        'Total': 'Total Points',
+        'Total_Approved': 'Total Approvals',
+        'Total_Applied': 'Total Applications'
+    }, inplace=True)
+
+    # Ensure the Rank column is included and set as the index
+    df_with_ranks['Rank'] = range(1, len(df_with_ranks) + 1)
+
+    # Specify the order of columns explicitly
+    # Make sure that the columns listed here match your DataFrame
+    columns_order = ['Rank', 'Entity', 'Total Points',
+                     'Total Approvals', 'Total Applications']
+
+    # Check if all specified columns exist in the DataFrame
+    for col in columns_order:
+        if col not in df_with_ranks.columns:
+            st.error(f"Column '{col}' not found in DataFrame.")
+            return  # Stop execution if a column is missing
+
+    # Reorder DataFrame to include the Rank column first
+    df_with_ranks = df_with_ranks[columns_order]
+
+    # Convert DataFrame to HTML, including the rank column as a standard column
+    html_table = df_with_ranks.to_html(
+        classes='dataframe', index=False, escape=False)
+
+    # Display the HTML table
+    st.markdown(html_table, unsafe_allow_html=True)
 # Main Streamlit app
 def main():
     st.set_page_config(
