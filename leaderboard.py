@@ -110,7 +110,7 @@ def calculate_ranks_on_score(df):
 def display_leaderboard(df):
 
 
-    df['Rank'] = display_score_ranks(df['Total'])
+    df['Rank'] = display_score_ranks(df)
     
     # Rename the column 'Total' to 'Total Points'
     df.rename(columns={'Total': 'Total Points'}, inplace=True)
@@ -163,7 +163,7 @@ def display_score_ranks(df):
     df_with_ranks = calculate_ranks_on_score(df)
     
     # Drop the index column
-    df_without_index = df_with_ranks[['Rank', 'Entity', 'Total']]
+    # df_without_index = df_with_ranks[['Rank', 'Entity', 'Total']]
 
     # Apply gold, silver, and bronze medals to the 'Entity' column
     df_with_ranks['Entity'] = df_with_ranks.apply(lambda row: 
