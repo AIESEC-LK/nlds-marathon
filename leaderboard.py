@@ -183,7 +183,7 @@ def applied_bar_chart_and_data(data):
     df_entity_applied_total.rename(columns={'index': 'Entity'}, inplace=True)
 
     # Create a colored bar chart using Plotly Express
-    fig_applied = px.bar(df_entity_applied_total, x='Entity', y='Total_Applied', title='👀 Total Applications by Entity', labels={
+    fig_applied = px.bar(df_entity_applied_total, x='Entity', y='Total_Applied', title='🌍 Total Applications by Entity', labels={
                          'Entity': 'Entity', 'Total_Applied': 'Applications'}, color='Entity')
 
     # Hide the legend
@@ -366,7 +366,7 @@ def main():
             with col2:
                 st.markdown(
                     "<div style='text-align: center;'>"
-                    f"<h3>👀 Total Applications</h3>"
+                    f"<h3>🌍 Total Applications</h3>"
                     f"<p style='font-size: 32px;'>{
                         df_entity_applied_total['Total_Applied'].sum()}</p>"
                     "</div>",
@@ -394,7 +394,7 @@ def main():
             applied_counts = count_applied_by_entity(data, selected_function)
 
             # Create a bar chart using Plotly Express
-            fig_1 = px.bar(applied_counts, x='Entity', y='Count_Applied', title=f'👀 Applications by Entity for {
+            fig_1 = px.bar(applied_counts, x='Entity', y='Count_Applied', title=f'🌍 Applications by Entity for {
                            selected_function} Function', labels={'Entity': 'Entity', 'Count_Applied': 'Applications'}, color='Entity')
             fig_1.update_layout(
                 title_font=dict(size=20, color="#31333F"),  # Title font size
