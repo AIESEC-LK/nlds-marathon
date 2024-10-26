@@ -209,6 +209,32 @@ def display_leaderboard_table(df):
     df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
     df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
 
+    # Apply custom CSS for font sizes similar to bar chart fonts
+    st.markdown(
+        """
+        <style>
+        /* Set general table font size */
+        .dataframe-table {
+            font-size: 14px;
+        }
+        /* Style the header font size and alignment */
+        .dataframe-table thead th {
+            font-size: 16px;
+            text-align: center;
+        }
+        /* Style the row font size */
+        .dataframe-table tbody td {
+            font-size: 14px;
+        }
+        /* Style the rank column to be bold and larger */
+        .dataframe-table tbody td:nth-child(1) {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        </style>
+        """, unsafe_allow_html=True
+    )
+
     st.dataframe(df.set_index('Rank'), use_container_width=True, height=250)
 # Main Streamlit app
 def main():
