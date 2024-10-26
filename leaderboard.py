@@ -111,8 +111,8 @@ def display_leaderboard(df):
 
     # Rename the column 'Total' to 'Total Points'
     df.rename(columns={'Total': 'Total Points'}, inplace=True)
-    df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
-    df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
+    # df.rename(columns={'Total_Approved': 'Total Approvals'}, inplace=True)
+    # df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
     
     # Define a layout with two columns
     # col1, col2, col3 = st.columns([3, 1, 1])
@@ -252,9 +252,7 @@ def main():
 
             # df_combined = pd.concat(df_ranks, df_entity_applied_total, df_entity_approved_total, on='Entity')
             # df_combined = df_ranks.merge(df_entity_applied_total, on='Entity').merge(df_entity_approved_total, on='Entity')
-            df_combined = df_entity_applied_total.merge(df_entity_approved_total, on='Entity').merge(df_ranks, on='Entity')
-
-            st.subheader('Leaderboard')
+            # df_combined = df_entity_applied_total.merge(df_entity_approved_total, on='Entity').merge(df_ranks, on='Entity')
 
             # Define a layout with two columns
             col1, col2 = st.columns([1,1])
@@ -267,8 +265,9 @@ def main():
             with col2:
                 st.metric(label="Total Applications", value=df_combined['Total_Applied'].sum())
                 
+            st.subheader('Leaderboard')
 
-            display_leaderboard(df_combined)
+            display_leaderboard(df_ranks)
 
             st.plotly_chart(fig_approved, use_container_width=True)
             st.plotly_chart(fig_applied, use_container_width=True)
