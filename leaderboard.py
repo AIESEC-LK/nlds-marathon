@@ -152,6 +152,10 @@ def display_score_ranks(df):
     # Calculate ranks based on scores
     df_with_ranks = calculate_ranks_on_score(df)
 
+    # Replace rank number with - if the total is 0
+    df_with_ranks['Rank'] = df_with_ranks.apply(lambda row:
+                                                '-' if row['Total'] == 0 else row['Rank'], axis=1)
+
     # Apply gold, silver, and bronze medals to the 'Entity' column
     df_with_ranks['Entity'] = df_with_ranks.apply(lambda row:
                                                   f"🥇 {row['Entity']}" if (row['Rank'] == 1 and row['Total'] !=0) else
