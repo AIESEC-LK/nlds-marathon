@@ -180,11 +180,11 @@ def approved_bar_chart_and_data(data):
     fig_approved = px.bar(df_entity_approved_total, x='Entity', y='Total_Approved', title='Total Approvals by Entity', labels={'Entity': 'Entity', 'Total_Approved': 'Approvals'},color='Entity')
     # Hide the legend
     fig_approved.update_layout(
-    title_font=dict(size=30),  # Title font size
-    xaxis_title_font=dict(size=26),  # X-axis title font size
-    yaxis_title_font=dict(size=26),  # Y-axis title font size
-    xaxis_tickfont=dict(size=24),  # X-axis tick font size
-    yaxis_tickfont=dict(size=24),  # Y-axis tick font size
+    title_font=dict(size=20),  # Title font size
+    xaxis_title_font=dict(size=16),  # X-axis title font size
+    yaxis_title_font=dict(size=16),  # Y-axis title font size
+    xaxis_tickfont=dict(size=14),  # X-axis tick font size
+    yaxis_tickfont=dict(size=14),  # Y-axis tick font size
     showlegend=False
 )
 
@@ -287,11 +287,11 @@ def main():
             # Create a bar chart using Plotly Express
             fig_1 = px.bar(applied_counts, x='Entity', y='Count_Applied', title=f'Applications by Entity for {selected_function} Function',labels={'Entity': 'Entity', 'Count_Applied': 'Applications'}, color='Entity')
             fig_1.update_layout(
-    title_font=dict(size=30),  # Title font size
-    xaxis_title_font=dict(size=26),  # X-axis title font size
-    yaxis_title_font=dict(size=26),  # Y-axis title font size
-    xaxis_tickfont=dict(size=24),  # X-axis tick font size
-    yaxis_tickfont=dict(size=24),  # Y-axis tick font size
+    title_font=dict(size=20),  # Title font size
+    xaxis_title_font=dict(size=16),  # X-axis title font size
+    yaxis_title_font=dict(size=16),  # Y-axis title font size
+    xaxis_tickfont=dict(size=14),  # X-axis tick font size
+    yaxis_tickfont=dict(size=14),  # Y-axis tick font size
     showlegend=False)
 
 
@@ -301,11 +301,11 @@ def main():
             # Create a bar chart using Plotly Express
             fig_2 = px.bar(approved_counts, x='Entity', y='Count_Approved', title=f'Approvals by Entity for {selected_function} Function',labels={'Entity': 'Entity', 'Count_Approved': 'Approvals'}, color='Entity')
             fig_2.update_layout(
-    title_font=dict(size=30),  # Title font size
-    xaxis_title_font=dict(size=26),  # X-axis title font size
-    yaxis_title_font=dict(size=26),  # Y-axis title font size
-    xaxis_tickfont=dict(size=24),  # X-axis tick font size
-    yaxis_tickfont=dict(size=24),  # Y-axis tick font size
+    title_font=dict(size=20),  # Title font size
+    xaxis_title_font=dict(size=16),  # X-axis title font size
+    yaxis_title_font=dict(size=16),  # Y-axis title font size
+    xaxis_tickfont=dict(size=14),  # X-axis tick font size
+    yaxis_tickfont=dict(size=14),  # Y-axis tick font size
     showlegend=False)
             
             st.plotly_chart(fig_2, use_container_width=True)
