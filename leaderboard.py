@@ -89,7 +89,7 @@ def count_approved_by_entity(df, selected_function):
     approved_counts.rename(columns={'Approved': 'Count_Approved'}, inplace=True)
     return approved_counts
 
-icon_path = 'https://aiesec.lk/data/dist/images/favicon.png'
+icon_path = 'https://lh3.googleusercontent.com/d/19CS85s1g6wqAdHJ-JBL_nEoaE1rzgK9C'
 
 def calculate_approval_ranks(df):
     # Sort the DataFrame by 'Total_Approved' column in descending order
