@@ -157,7 +157,14 @@ def applied_bar_chart_and_data(data):
     fig_applied = px.bar(df_entity_applied_total, x='Entity', y='Total_Applied', title='Total Applications by Entity', labels={'Entity': 'Entity', 'Total_Applied': 'Applications'}, color='Entity')
 
     # Hide the legend
-    fig_applied.update_layout(showlegend=False)
+    fig_applied.update_layout(
+    title_font=dict(size=20),  # Title font size
+    xaxis_title_font=dict(size=16),  # X-axis title font size
+    yaxis_title_font=dict(size=16),  # Y-axis title font size
+    xaxis_tickfont=dict(size=14),  # X-axis tick font size
+    yaxis_tickfont=dict(size=14),  # Y-axis tick font size
+    showlegend=False
+)
 
     return fig_applied, df_entity_applied_total
 
@@ -172,7 +179,14 @@ def approved_bar_chart_and_data(data):
     # Create a colored bar chart using Plotly Express
     fig_approved = px.bar(df_entity_approved_total, x='Entity', y='Total_Approved', title='Total Approvals by Entity', labels={'Entity': 'Entity', 'Total_Approved': 'Approvals'},color='Entity')
     # Hide the legend
-    fig_approved.update_layout(showlegend=False)
+    fig_approved.update_layout(
+    title_font=dict(size=20),  # Title font size
+    xaxis_title_font=dict(size=16),  # X-axis title font size
+    yaxis_title_font=dict(size=16),  # Y-axis title font size
+    xaxis_tickfont=dict(size=14),  # X-axis tick font size
+    yaxis_tickfont=dict(size=14),  # Y-axis tick font size
+    showlegend=False
+)
 
     return fig_approved, df_entity_approved_total
 
