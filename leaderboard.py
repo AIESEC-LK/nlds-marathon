@@ -107,7 +107,7 @@ def calculate_ranks_on_score(df):
     
     return df_sorted
 
-def display_leaderboard(df, total_approvals, total_applications):
+def display_leaderboard(df):
 
     # Rename the column 'Total' to 'Total Points'
     df.rename(columns={'Total': 'Total Points'}, inplace=True)
@@ -115,20 +115,20 @@ def display_leaderboard(df, total_approvals, total_applications):
     df.rename(columns={'Total_Applied': 'Total Applications'}, inplace=True)
     
     # Define a layout with two columns
-    col1, col2, col3 = st.columns([3, 1, 1])
+    # col1, col2, col3 = st.columns([3, 1, 1])
 
-    # Display the total approvals in the first column
-    with col1:
-        st.subheader('Leaderboard')
+    # # Display the total approvals in the first column
+    # with col1:
+    #     st.subheader('Leaderboard')
 
-    # Display the leaderboard in the second column
-    with col2:
-        # st.metric(label="Total AP Approvals", value=total_approvals)
-        # st.button(f"Total AP Approvals : **{total_approvals}**", key="no_action_button")
-        st.metric(label="Total Approvals", value=total_approvals)
+    # # Display the leaderboard in the second column
+    # with col2:
+    #     # st.metric(label="Total AP Approvals", value=total_approvals)
+    #     # st.button(f"Total AP Approvals : **{total_approvals}**", key="no_action_button")
+    #     st.metric(label="Total Approvals", value=total_approvals)
     
-    with col3:
-        st.metric(label="Total Applications", value=total_applications)
+    # with col3:
+    #     st.metric(label="Total Applications", value=total_applications)
 
     st.dataframe(df.set_index('Rank'), use_container_width=True, height=250)
 
@@ -254,7 +254,21 @@ def main():
             # df_combined = df_ranks.merge(df_entity_applied_total, on='Entity').merge(df_entity_approved_total, on='Entity')
             df_combined = df_entity_applied_total.merge(df_entity_approved_total, on='Entity').merge(df_ranks, on='Entity')
 
-            display_leaderboard(df_combined, df_combined['Total_Approved'].sum(), df_combined['Total_Applied'].sum())
+            st.subheader('Leaderboard')
+
+            # Define a layout with two columns
+            col1, col2 = st.columns([1,1])
+
+            # Display the total approvals in the first column
+            with col1:
+                st.metric(label="Total Approvals", value=df_combined['Total_Approved'].sum())
+
+            # Display the leaderboard in the second column
+            with col2:
+                st.metric(label="Total Applications", value=df_combined['Total_Applied'].sum())
+                
+
+            display_leaderboard(df_combined)
 
             st.plotly_chart(fig_approved, use_container_width=True)
             st.plotly_chart(fig_applied, use_container_width=True)
