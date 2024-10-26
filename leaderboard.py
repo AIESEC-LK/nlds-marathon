@@ -154,9 +154,9 @@ def display_score_ranks(df):
 
     # Apply gold, silver, and bronze medals to the 'Entity' column
     df_with_ranks['Entity'] = df_with_ranks.apply(lambda row:
-                                                  f"🥇 {row['Entity']}" if row['Rank'] == 1 else
-                                                  f"🥈 {row['Entity']}" if row['Rank'] == 2 else
-                                                  f"🥉 {row['Entity']}" if row['Rank'] == 3 else
+                                                  f"🥇 {row['Entity']}" if (row['Rank'] == 1 and row['Total Points'] !=0) else
+                                                  f"🥈 {row['Entity']}" if (row['Rank'] == 2 and row['Total Points'] !=0) else
+                                                  f"🥉 {row['Entity']}" if (row['Rank'] == 3 and row['Total Points'] !=0)else
                                                   row['Entity'], axis=1)
 
     # display the leaderboard section
@@ -270,7 +270,8 @@ def display_leaderboard_table(df):
 
     # Specify the order of columns explicitly
     # Make sure that the columns listed here match your DataFrame
-    columns_order = ['Rank', 'Entity', 'Total Applications', 'Total Approvals', 'Total Points',]
+    columns_order = ['Rank', 'Entity', 'Total Points',
+                     'Total Approvals', 'Total Applications']
 
     # Check if all specified columns exist in the DataFrame
     for col in columns_order:
