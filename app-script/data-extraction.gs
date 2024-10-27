@@ -1,6 +1,6 @@
 // API data
 const baseUrl = 'https://analytics.api.aiesec.org/v2/applications/analyze';
-const accessToken = '0b085db925bfe08eb8b7acbe9c53eefd26fbe6347cb943ac1da87b1204e5c8db';
+const accessToken = '';
 
 // Constants
 const entitiesList = [
