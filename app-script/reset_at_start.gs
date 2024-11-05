@@ -1,9 +1,9 @@
 // API data
-const baseUrl = 'https://analytics.api.aiesec.org/v2/applications/analyze';
-const accessToken = '';
+const baseUrl2 = 'https://analytics.api.aiesec.org/v2/applications/analyze';
+const accessToken2 = '';
 
 // Constants
-const entitiesList = [
+const entitiesList2 = [
     { id: 222, name: 'CC' },
     { id: 872, name: 'CN' },
     { id: 1340, name: 'CS' },
@@ -17,7 +17,7 @@ const entitiesList = [
 ];
 
 
-const regexList = [
+const regexList2 = [
   // {name: "Total", pattern: /^.*_total$/},
 
   {name: "oGV", pattern: /^o_.*_[7]$/},
@@ -30,12 +30,12 @@ const regexList = [
 ];
 
 // Configs
-const startDate = '2024-10-01';
-const endDate = '2024-10-31';
+const startDate2 = '2024-10-26';
+const endDate2 = '2024-10-28';
 
-const sheetName = "NLDS24"
+const sheetName2 = "Reset"
 
-const keysList = [
+const keysList2 = [
   // "matched",
   "applied",
   // "an_accepted",
@@ -46,7 +46,7 @@ const keysList = [
   // "completed"
 ]
 
-const headersList = [
+const headersList2 = [
   "Entity",
   "Function",
   // "Matched",
@@ -62,14 +62,14 @@ const headersList = [
 ]
 
 // Helper functions
-function fetchData(startDate, endDate) {
-  const url = `${baseUrl}?access_token=${accessToken}&start_date=${startDate}&end_date=${endDate}&performance_v3[office_id]=${1623}`;
+function fetchData2(startDate2, endDate2) {
+  const url = `${baseUrl2}?access_token=${accessToken2}&start_date=${startDate2}&end_date=${endDate2}&performance_v3[office_id]=${1623}`;
   const json = UrlFetchApp.fetch(url).getContentText();
   const data = JSON.parse(json);
   return data;
 }
 
-function extractData(apiOutput) {
+function extractData2(apiOutput) {
   let extractedData = {}
 
   regexList.forEach((regex) => {
@@ -78,7 +78,7 @@ function extractData(apiOutput) {
     const regexMatches = Object.entries(apiOutput).filter(([key, value]) => regex.pattern.test(key));
 
     regexMatches.forEach((match)=> {
-      keysList.forEach((key) => {
+      keysList2.forEach((key) => {
         if(match[0].includes(key)){
           obj[key] = obj[key] ? obj[key] : 0 + (match[1]?.doc_count || 0)
         };
@@ -101,18 +101,18 @@ function extractData(apiOutput) {
   return extractedData;
 }
 
-function prepareSheet() {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+function prepareSheet2() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName2);
 
   if (!sheet) {
-    throw new Error($`Sheet with name ${sheetName} does not exist.`);
+    throw new Error($`Sheet with name ${sheetName2} does not exist.`);
   }
 
-  sheet.getRange(1, 1, 1 , headersList.length).setValues([headersList]); 
+  sheet.getRange(1, 1, 1 , headersList.length).setValues([headersList2]); 
 }
 
-function writeRowToSheet(rowIndex, rowData){
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+function writeRowToSheet2(rowIndex, rowData){
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName2);
 
     // row --- int --- top row of the range
     // column --- int--- leftmost column of the range
@@ -123,18 +123,18 @@ function writeRowToSheet(rowIndex, rowData){
 
 // =================
 
-function startProcess(){
+function startProcess2(){
   console.log("Starting process...");
-  prepareSheet();
+  prepareSheet2();
 
   let finalOutput = {}
-  let allData= fetchData(startDate, endDate);
+  let allData= fetchData2(startDate2, endDate2);
 
   console.log("Fetching data...")
   entitiesList.forEach((entity) => {
     let entityData=allData[entity.id.toString()]
     console.log(entityData)
-    const extractedData = extractData(entityData);
+    const extractedData = extractData2(entityData);
 
     finalOutput[entity.name] = extractedData;
   });
@@ -152,7 +152,7 @@ function startProcess(){
         ...dynamicColumns
       ];
 
-    writeRowToSheet((index1 * regexList.length)+(index2+1), rowData);
+    writeRowToSheet2((index1 * regexList.length)+(index2+1), rowData);
     });
   });
 
