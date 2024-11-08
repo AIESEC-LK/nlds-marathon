@@ -104,6 +104,16 @@ def count_approved_by_entity(df, selected_function):
         columns={'Approved': 'Count_Approved'}, inplace=True)
     return approved_counts
 
+# Function to calculate the %applied to approved ratio for each entity on the selected function
+
+def count_applied_to_approved_ratio(df, selected_function):
+    filtered_df = df[df['Function'] == selected_function]
+    applied_to_approved_ratio = filtered_df.groupby(
+        'Entity')['%APL-APD'].sum().reset_index()
+    applied_to_approved_ratio.rename(
+        columns={'%APL-APD': 'Applied_to_Approved_Ratio'}, inplace=True)
+    return applied_to_approved_ratio
+
 icon_path = 'https://lh3.googleusercontent.com/d/19CS85s1g6wqAdHJ-JBL_nEoaE1rzgK9C'
 
 def calculate_approval_ranks(df):
@@ -310,7 +320,7 @@ def main():
     with col1:
         st.image(icon_path)
     with col2:
-        st.title("Hackathon - Dashboard")
+        st.title("Winter Exchange Marathon - Dashboard")
 
     st.markdown(
         "<hr style='border: 1px solid #000; width: 100%;'>",
@@ -321,7 +331,6 @@ def main():
     st_autorefresh(interval=1 * 60 * 1000, key="data_refresh")
     # URL to your Google Sheets data
     # Datasource url / Google Sheets CSV
-    # sheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXOP09TlmTmfTCx5x7Dwgm8s80W4z7m9plWqbZ7Lfodxox-26BoTNDq-tozEQylR7jKa3UbtIjU1I1/pub?gid=1562137798&single=true&output=csv"
     sheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1oLfepAJoK2NEU3rdYh2RPEUVW3Gk3Rmnj6GQ4oxDB4TI-RR5Zttx3cftpccg3YcyeNW4XUer_YQb/pub?gid=0&single=true&output=csv"
 
     # Load data using the cached function
@@ -406,8 +415,8 @@ def main():
             approved_counts = count_approved_by_entity(data, selected_function)
 
             # Create a bar chart using Plotly Express
-            fig_2 = px.bar(approved_counts, x='Entity', y='Count_Approved', title=f'✅ Approvals by Entity for {
-                           selected_function} Function', labels={'Entity': 'Entity', 'Count_Approved': 'Approvals'}, color='Entity')
+            fig_2 = px.bar(approved_counts, x='Entity', y='Count_Approved', title=f'✅ Approvals by Entity for {selected_function} Function', 
+                labels={'Entity': 'Entity', 'Count_Approved': 'Approvals'}, color='Entity')
             fig_2.update_layout(
                 title_font=dict(size=20, color="#31333F"),  # Title font size
                 # X-axis title font size
@@ -420,8 +429,28 @@ def main():
                 yaxis_tickfont=dict(size=14, color="#31333F"),
                 showlegend=False)
 
-            st.plotly_chart(fig_2, use_container_width=True)
+            applied_to_approved_percent = count_applied_to_approved_ratio(
+                data, selected_function)
+
+            # Create a bar chart using Plotly Express
+            fig_3 = px.bar(applied_to_approved_percent, x='Entity', y='Applied_to_Approved_Ratio', title=f'📊 Applied to Approved Ratio by Entity for {selected_function} Function',
+                labels={'Entity': 'Entity', 'Applied_to_Approved_Ratio': 'Applied to Approved Ratio'}, color='Entity')
+
+            fig_3.update_layout(
+                title_font=dict(size=20, color="#31333F"),  # Title font size
+                # X-axis title font size
+                xaxis_title_font=dict(size=16, color="#31333F"),
+                # Y-axis title font size
+                yaxis_title_font=dict(size=16, color="#31333F"),
+                # X-axis tick font size
+                xaxis_tickfont=dict(size=14, color="#31333F"),
+                # Y-axis tick font size
+                yaxis_tickfont=dict(size=14, color="#31333F"),
+                showlegend=False)
+
             st.plotly_chart(fig_1, use_container_width=True)
+            st.plotly_chart(fig_2, use_container_width=True)
+            st.plotly_chart(fig_3, use_container_width=True)
 
             st.write("<br><br>", unsafe_allow_html=True)
             # Footer - It would be great if you could give us a recognition for the team.
