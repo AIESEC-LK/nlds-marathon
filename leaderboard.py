@@ -78,7 +78,7 @@ def calulate_total_points(df):
     entity_sum = {}
     for index, row in df.iterrows():
         entity = row['Entity']
-        total = row['OPS Score']
+        total = row['Total']
         if entity not in entity_sum:
             entity_sum[entity] = total
         else:
