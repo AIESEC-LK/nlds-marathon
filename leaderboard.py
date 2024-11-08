@@ -78,7 +78,7 @@ def calulate_total_points(df):
     entity_sum = {}
     for index, row in df.iterrows():
         entity = row['Entity']
-        total = row['Total']
+        total = row['OPS Score']
         if entity not in entity_sum:
             entity_sum[entity] = total
         else:
@@ -264,7 +264,7 @@ def display_leaderboard_table(df):
 
     # Rename the columns for better readability
     df_with_ranks.rename(columns={
-        'Total': 'Total Points',
+        'Total': 'OPS Score',
         'Total_Approved': 'Total Approvals',
         'Total_Applied': 'Total Applications'
     }, inplace=True)
@@ -274,7 +274,7 @@ def display_leaderboard_table(df):
 
     # Specify the order of columns explicitly
     # Make sure that the columns listed here match your DataFrame
-    columns_order = ['Rank', 'Entity', 'Total Points',
+    columns_order = ['Rank', 'Entity', 'OPS Score',
                      'Total Approvals', 'Total Applications']
 
     # Check if all specified columns exist in the DataFrame
@@ -299,7 +299,7 @@ def main():
     st.set_page_config(
         layout="wide",
         # You can change the page title here
-        page_title="Transcend Hackathon - Dashboard",
+        page_title="Winter Exchange Marathon - Dashboard",
         page_icon=icon_path,
     )
 
@@ -321,7 +321,8 @@ def main():
     st_autorefresh(interval=1 * 60 * 1000, key="data_refresh")
     # URL to your Google Sheets data
     # Datasource url / Google Sheets CSV
-    sheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXOP09TlmTmfTCx5x7Dwgm8s80W4z7m9plWqbZ7Lfodxox-26BoTNDq-tozEQylR7jKa3UbtIjU1I1/pub?gid=1562137798&single=true&output=csv"
+    # sheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTXOP09TlmTmfTCx5x7Dwgm8s80W4z7m9plWqbZ7Lfodxox-26BoTNDq-tozEQylR7jKa3UbtIjU1I1/pub?gid=1562137798&single=true&output=csv"
+    sheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1oLfepAJoK2NEU3rdYh2RPEUVW3Gk3Rmnj6GQ4oxDB4TI-RR5Zttx3cftpccg3YcyeNW4XUer_YQb/pub?gid=0&single=true&output=csv"
 
     # Load data using the cached function
     data = load_data(sheet_url)
