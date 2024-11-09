@@ -285,11 +285,26 @@ def display_leaderboard_table(df):
         border: 1px solid #ddd; /* Add borders to cells */
     }
     thead th {
-        background-color: green !important; /* Set the first row's background color to blue */
+        background-color: green !important; /* Set the first row's background color to green */
         color: white !important; /* Optional: Set text color to white for contrast */
     }
 
-    </style>
+    /* Add media queries for responsiveness */
+    @media screen and (max-width: 768px) {
+        th, td {
+            font-size: 16px !important; /* Reduce font size for small screens */
+            padding: 8px; /* Adjust padding for small screens */
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        th, td {
+            font-size: 11px !important; /* Further reduce font size for very small screens */
+            padding: 6px; /* Further adjust padding */
+        }
+    }
+</style>
+
     """, unsafe_allow_html=True)
 
     # Calculate ranks based on scores
