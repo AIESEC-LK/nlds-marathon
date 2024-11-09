@@ -125,7 +125,7 @@ def count_applied_to_approved_ratio(df, selected_function):
 # Replace with your image URL_image_pa
 
 
-icon_path = 'https://lh3.googleusercontent.com/d/19CS85s1g6wqAdHJ-JBL_nEoaE1rzgK9C'
+icon_path = 'https://lh3.googleusercontent.com/d/10OFT6dqjwt3eU05326__4rcclk7Siyon'
 rocket_image_path = 'https://lh3.googleusercontent.com/d/1hGj6HjOQbu-oDwl_1wFJxJnf3zoB4UYz'
 
 
@@ -510,6 +510,10 @@ def main():
 
             with col6:
                 st.plotly_chart(fig_2, use_container_width=True)
+
+            st.write("<br><br>", unsafe_allow_html=True)
+
+            st.divider()
 
             st.write("<br><br>", unsafe_allow_html=True)
             # Footer - It would be great if you could give us a recognition for the team.
