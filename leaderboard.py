@@ -536,7 +536,11 @@ def main():
                 # functional_image_rendering(selected_function)
 
             # with col10:
-            st.plotly_chart(fig_3, use_container_width=True)
+            
+            col13, col14, col15 = st.columns([1,2,1])
+            
+            with col14:
+                st.plotly_chart(fig_3, use_container_width=True)
 
             st.write("<br><br>", unsafe_allow_html=True)
 
