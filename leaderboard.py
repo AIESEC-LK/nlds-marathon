@@ -455,10 +455,17 @@ def main():
 
             st.divider()
 
-            st.subheader('Functional Analysis')
-            # Create a select box to choose the 'Function'
-            selected_function = st.selectbox(
-                'Select Function', data['Function'].unique())
+            col11, col12 = st.columns([9, 2])
+
+            with col11:
+
+                st.subheader('Functional Analysis')
+                # Create a select box to choose the 'Function'
+                selected_function = st.selectbox(
+                    'Select Function', data['Function'].unique())
+
+            with col12:
+                functional_image_rendering(selected_function)
 
             # Get the count of 'Applied' related to each entity based on the selected function
             applied_counts = count_applied_by_entity(data, selected_function)
@@ -523,13 +530,13 @@ def main():
             with col6:
                 st.plotly_chart(fig_2, use_container_width=True)
 
-            col9, col10 = st.columns([1, 2])
+            # col9, col10 = st.columns([1, 2])
 
-            with col9:
-                functional_image_rendering(selected_function)
+            # with col9:
+                # functional_image_rendering(selected_function)
 
-            with col10:
-                st.plotly_chart(fig_3, use_container_width=True)
+            # with col10:
+            st.plotly_chart(fig_3, use_container_width=True)
 
             st.write("<br><br>", unsafe_allow_html=True)
 
