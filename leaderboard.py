@@ -284,6 +284,11 @@ def display_leaderboard_table(df):
     td {
         border: 1px solid #ddd; /* Add borders to cells */
     }
+    thead th {
+        background-color: green !important; /* Set the first row's background color to blue */
+        color: white !important; /* Optional: Set text color to white for contrast */
+    }
+
     </style>
     """, unsafe_allow_html=True)
 
