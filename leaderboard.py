@@ -126,7 +126,7 @@ def count_applied_to_approved_ratio(df, selected_function):
 
 
 icon_path = 'https://lh3.googleusercontent.com/d/10OFT6dqjwt3eU05326__4rcclk7Siyon'
-rocket_image_path = 'https://lh3.googleusercontent.com/d/1hGj6HjOQbu-oDwl_1wFJxJnf3zoB4UYz'
+# rocket_image_path = 'https://lh3.googleusercontent.com/d/1hGj6HjOQbu-oDwl_1wFJxJnf3zoB4UYz'
 
 
 gta_image_path = "https://lh3.googleusercontent.com/d/1KP_HuRqFjffWIEZsOHqrGh4l7r0YApTv"
@@ -421,13 +421,13 @@ def main():
 
             # Display the leaderboard table
 
-            col7, col8 = st.columns([3, 1])
+            # col7, col8 = st.columns([3, 1])
 
-            with col8:
-                st.image(rocket_image_path)
+            # with col8:
+            # st.image(rocket_image_path)
 
-            with col7:
-                display_leaderboard_table(df_combined)
+            # with col7:
+            display_leaderboard_table(df_combined)
 
             col4, col5 = st.columns([1, 1])
             with col4:
@@ -500,14 +500,6 @@ def main():
                 yaxis_tickfont=dict(size=14, color="#31333F"),
                 showlegend=False)
 
-            col9, col10 = st.columns([1, 2])
-
-            with col9:
-                functional_image_rendering(selected_function)
-
-            with col10:
-                st.plotly_chart(fig_3, use_container_width=True)
-
             col5, col6 = st.columns(2)
 
             with col5:
@@ -515,6 +507,14 @@ def main():
 
             with col6:
                 st.plotly_chart(fig_2, use_container_width=True)
+
+            col9, col10 = st.columns([1, 2])
+
+            with col9:
+                functional_image_rendering(selected_function)
+
+            with col10:
+                st.plotly_chart(fig_3, use_container_width=True)
 
             st.write("<br><br>", unsafe_allow_html=True)
 
