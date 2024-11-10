@@ -446,6 +446,13 @@ def main():
                 df_entity_approved_total, on='Entity').merge(
                     df_entity_apltoapd_total, on='Entity').merge(df_ranks, on='Entity')
 
+            # Calculate total values
+            total_approved = df_entity_approved_total['Total_Approved'].sum()
+            total_applied = df_entity_applied_total['Total_Applied'].sum()
+
+            # Calculate the conversion rate, with a check for division by zero
+            conversion_rate = round(total_approved / total_applied, 2) if total_applied != 0 else 0
+
             # Define a layout with two columns
             col1, col2, col3 = st.columns([1, 1, 1])
 
@@ -475,8 +482,7 @@ def main():
                 st.markdown(
                     "<div style='text-align: center;'>"
                     f"<h3>📊 Overall Applied to Approved Coversion Rate</h3>"
-                    f"<p style='font-size: 32px;'>{
-                        round(df_entity_approved_total['Total_Approved'].sum()/df_entity_applied_total['Total_Applied'].sum(), 2)} % </p>"
+                    f"<p style='font-size: 32px;'>{conversion_rate} %</p>"
                     "</div>",
                     unsafe_allow_html=True,
                 )
