@@ -393,14 +393,14 @@ def main():
     # The Dashboard Title (You can change here)
     # st.title("Transcend Hackathon - Dashboard")
 
-    col1, col2, col22 = st.columns([2, 14, 4])
+    col1, col1_, col2, col22 = st.columns([3, 1, 14, 4])
     with col1:
         st.image(icon_path)
     with col2:
         # st.title("Winter Exchange Marathon - Dashboard")
         st.markdown(
                     "<div style='text-align: center;'>"
-                    f"<h2>Winter Exchange Marathon - Dashboard</h2>"
+                    f"<h1>Winter Exchange Marathon - Dashboard</h1>"
                     # f"<p style='font-size: 32px;'>{
                     #     df_entity_applied_total['Total_Applied'].sum()}</p>"
                     "</div>",
