@@ -359,9 +359,7 @@ def display_leaderboard_table(df):
 # Functional Image Rendaring
 # Replace with your image URL_image_pa
 
-# icon_path = 'https://lh3.googleusercontent.com/d/10OFT6dqjwt3eU05326__4rcclk7Siyon'
-# 'https://drive.google.com/file/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1/view?usp=sharing'
-# icon_path = 'https://photos.app.goo.gl/PTbSqsYCWXKWEaoh9'
+# exchange marathon logo
 icon_path = 'https://lh3.googleusercontent.com/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1'
 gta_image_path = "https://lh3.googleusercontent.com/d/1KP_HuRqFjffWIEZsOHqrGh4l7r0YApTv"
 gte_image_path = 'https://lh3.googleusercontent.com/d/1pO8mI2dVEqNBHWXhz_hNP7gllVDkQfND'
