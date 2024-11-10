@@ -405,7 +405,7 @@ def main():
         # st.title("Winter Exchange Marathon - Dashboard")
         st.markdown(
             "<div style='text-align: center;'>"
-            f"<br/><br/><br/><h1>Winter Exchange Marathon Dashboard</h1>"
+            f"<h1>Winter Exchange Marathon Dashboard</h1>"
             # f"<p style='font-size: 32px;'>{
             #     df_entity_applied_total['Total_Applied'].sum()}</p>"
             "</div>",
