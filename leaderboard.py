@@ -426,8 +426,6 @@ def main():
             fig_apltoapd, df_entity_apltoapd_total = applied_to_approved_ratio_bar_chart_and_data(df_entity_approved_total, df_entity_applied_total)
             df_ranks = total_points(data)
 
-            # df_combined = pd.concat(df_ranks, df_entity_applied_total, df_entity_approved_total, on='Entity')
-            # df_combined = df_ranks.merge(df_entity_applied_total, on='Entity').merge(df_entity_approved_total, on='Entity')
             df_combined = df_entity_applied_total.merge(
                 df_entity_approved_total, on='Entity').merge(
                     df_entity_apltoapd_total, on='Entity').merge(df_ranks, on='Entity')
@@ -462,7 +460,7 @@ def main():
                     "<div style='text-align: center;'>"
                     f"<h3>📊 Overall Applied to Approved Coversion Rate</h3>"
                     f"<p style='font-size: 32px;'>{
-                        df_entity_approved_total['Total_Approved'].sum()/df_entity_applied_total['Total_Applied'].sum()} % </p>"
+                        round(df_entity_approved_total['Total_Approved'].sum()/df_entity_applied_total['Total_Applied'].sum(),2)} % </p>"
                     "</div>",
                     unsafe_allow_html=True,
                 )
