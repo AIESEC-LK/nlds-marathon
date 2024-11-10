@@ -247,7 +247,7 @@ def applied_to_approved_ratio_bar_chart_and_data(df_entity_apd_total, df_entity_
     apl_to_apd = pd.DataFrame({
         # use entity column as the index
         'Entity': df_entity_apd_total['Entity'],
-        'APL_to_APD': round(df_entity_apd_total['Total_Approved']*100 / df_entity_apl_total['Total_Applied'], 2)
+        'APL_to_APD': round(df_entity_apd_total['Total_Approved']*100 / df_entity_apl_total['Total_Applied'], 2) if df_entity_apl_total['Total_Applied'] != 0 else 0
     })
 
     fig_apl_to_apd = px.bar(apl_to_apd, x='Entity', y='APL_to_APD', title='📊 Applied to Approved Ratio by Entity', labels={
@@ -359,12 +359,9 @@ def display_leaderboard_table(df):
     st.markdown(html_table, unsafe_allow_html=True)
 
 # Functional Image Rendaring
-# Replace with your image URL_image_pa
-
+# Replace with your image URL_image_path
 
 # exchange marathon logo
-# icon_path = 'https://lh3.googleusercontent.com/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1' #original
-# icon_path = 'https://lh3.googleusercontent.com/d/1u9YOAAdZNuUJtCFw5ZEBncncQbE95rzw'
 icon_path = 'https://lh3.googleusercontent.com/d/19KFA_FrnUb8UVj06EyfhFXdeDa6vVVui'
 mascot_image = 'https://lh3.googleusercontent.com/d/1undYpxuWYWLP3A0uH1XvUJRCnNIkXpod'
 favicon_path = 'https://lh3.googleusercontent.com/d/1Fide8c8sEd6-SLiA_bS3lVr93OOCw9Mw'
