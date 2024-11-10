@@ -245,7 +245,7 @@ def applied_to_approved_ratio_bar_chart_and_data(df_entity_apd_total, df_entity_
 
     apl_to_apd = pd.DataFrame({
         'Entity': df_entity_apd_total['Entity'], # use entity column as the index
-        'APL_to_APD': df_entity_apd_total['Total_Approved'] / df_entity_apl_total['Total_Applied']  
+        'APL_to_APD': df_entity_apd_total['Total_Approved']*100 / df_entity_apl_total['Total_Applied']  
     })
 
 
@@ -462,7 +462,7 @@ def main():
                     "<div style='text-align: center;'>"
                     f"<h3>📊 Overall Applied to Approved Coversion Rate</h3>"
                     f"<p style='font-size: 32px;'>{
-                        df_entity_approved_total['Total_Approved'].sum()/df_entity_applied_total['Total_Applied'].sum()}</p>"
+                        df_entity_approved_total['Total_Approved'].sum()/df_entity_applied_total['Total_Applied'].sum()} % </p>"
                     "</div>",
                     unsafe_allow_html=True,
                 )
