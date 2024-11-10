@@ -122,17 +122,6 @@ def count_applied_to_approved_ratio(df, selected_function):
         columns={'%APL-APD': 'Applied_to_Approved_Ratio'}, inplace=True)
     return applied_to_approved_ratio
 
-# Replace with your image URL_image_pa
-
-
-icon_path = 'https://lh3.googleusercontent.com/d/10OFT6dqjwt3eU05326__4rcclk7Siyon'
-# rocket_image_path = 'https://lh3.googleusercontent.com/d/1hGj6HjOQbu-oDwl_1wFJxJnf3zoB4UYz'
-
-
-gta_image_path = "https://lh3.googleusercontent.com/d/1KP_HuRqFjffWIEZsOHqrGh4l7r0YApTv"
-gte_image_path = 'https://lh3.googleusercontent.com/d/1pO8mI2dVEqNBHWXhz_hNP7gllVDkQfND'
-gv_image_path = "https://lh3.googleusercontent.com/d/1P_mg-0qWhpPp2bs9_XlgDru_YA3bjvSi"
-
 
 def calculate_approval_ranks(df):
     # Sort the DataFrame by 'Total_Approved' column in descending order
@@ -342,6 +331,17 @@ def display_leaderboard_table(df):
     st.markdown(html_table, unsafe_allow_html=True)
 
 # Functional Image Rendaring
+# Replace with your image URL_image_pa
+
+
+# icon_path = 'https://lh3.googleusercontent.com/d/10OFT6dqjwt3eU05326__4rcclk7Siyon'
+# rocket_image_path = 'https://lh3.googleusercontent.com/d/1hGj6HjOQbu-oDwl_1wFJxJnf3zoB4UYz'
+
+
+icon_path = 'https://drive.google.com/file/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1/view?usp=sharing'
+gta_image_path = "https://lh3.googleusercontent.com/d/1KP_HuRqFjffWIEZsOHqrGh4l7r0YApTv"
+gte_image_path = 'https://lh3.googleusercontent.com/d/1pO8mI2dVEqNBHWXhz_hNP7gllVDkQfND'
+gv_image_path = "https://lh3.googleusercontent.com/d/1P_mg-0qWhpPp2bs9_XlgDru_YA3bjvSi"
 
 
 def functional_image_rendering(function):
@@ -357,10 +357,6 @@ def functional_image_rendering(function):
 
 
 # Main Streamlit app
-
-# icon_path = 'https://lh3.googleusercontent.com/d/19CS85s1g6wqAdHJ-JBL_nEoaE1rzgK9C'
-icon_path = 'https://drive.google.com/file/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1/view?usp=sharing'
-
 
 def main():
     st.set_page_config(
