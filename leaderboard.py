@@ -482,7 +482,7 @@ def main():
                 st.markdown(
                     "<div style='text-align: center;'>"
                     f"<h3>📊 Overall Applied to Approved Coversion Rate</h3>"
-                    f"<p style='font-size: 32px;'>{conversion_rate} %</p>"
+                    f"<p style='font-size: 32px;'>{conversion_rate*100} %</p>"
                     "</div>",
                     unsafe_allow_html=True,
                 )
