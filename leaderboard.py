@@ -249,8 +249,8 @@ def applied_to_approved_ratio_bar_chart_and_data(df_entity_apd_total, df_entity_
     })
 
 
-    fig_apl_to_apd = px.bar(apl_to_apd, x='Entity', y=apl_to_apd, title='📊 Applied to Approved Ratio by Entity', labels={
-                            'Entity': 'Entity', 'Total_Approved': 'Approvals'}, color='Entity')
+    fig_apl_to_apd = px.bar(apl_to_apd, x='Entity', y='APL_to_APD', title='📊 Applied to Approved Ratio by Entity', labels={
+                            'Entity': 'Entity', 'APL_to_APD': 'Approvals'}, color='Entity')
 
     fig_apl_to_apd.update_layout(
         title_font=dict(size=20, color="#31333F"),  # Title font size
