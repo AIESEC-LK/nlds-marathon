@@ -361,6 +361,7 @@ def display_leaderboard_table(df):
 
 # exchange marathon logo
 icon_path = 'https://lh3.googleusercontent.com/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1'
+favicon_path = 'https://lh3.googleusercontent.com/d/1Fide8c8sEd6-SLiA_bS3lVr93OOCw9Mw'
 gta_image_path = "https://lh3.googleusercontent.com/d/1KP_HuRqFjffWIEZsOHqrGh4l7r0YApTv"
 gte_image_path = 'https://lh3.googleusercontent.com/d/1pO8mI2dVEqNBHWXhz_hNP7gllVDkQfND'
 gv_image_path = "https://lh3.googleusercontent.com/d/1P_mg-0qWhpPp2bs9_XlgDru_YA3bjvSi"
@@ -385,13 +386,13 @@ def main():
         layout="wide",
         # You can change the page title here
         page_title="Winter Exchange Marathon - Dashboard",
-        page_icon=icon_path,
+        page_icon=favicon_path,
     )
 
     # The Dashboard Title (You can change here)
     # st.title("Transcend Hackathon - Dashboard")
 
-    col1, col2 = st.columns([1, 15])
+    col1, col2 = st.columns([2, 14, 2])
     with col1:
         st.image(icon_path)
     with col2:
