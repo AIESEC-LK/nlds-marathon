@@ -374,7 +374,7 @@ gta_image_path = "https://lh3.googleusercontent.com/d/1KP_HuRqFjffWIEZsOHqrGh4l7
 gte_image_path = 'https://lh3.googleusercontent.com/d/1pO8mI2dVEqNBHWXhz_hNP7gllVDkQfND'
 gv_image_path = "https://lh3.googleusercontent.com/d/1P_mg-0qWhpPp2bs9_XlgDru_YA3bjvSi"
 
-title_image_path = "https://lh3.googleusercontent.com/d/1OX9pwimdYXg0yLWBDwmCDtv1DgkoZYKo"
+title_image_path = "https://lh3.googleusercontent.com/d/1UVGBInlNXFd6Q6m5tLeRJfh21OMkjhi2"
 
 
 def functional_image_rendering(function):
