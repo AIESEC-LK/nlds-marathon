@@ -247,8 +247,11 @@ def applied_to_approved_ratio_bar_chart_and_data(df_entity_apd_total, df_entity_
     apl_to_apd = pd.DataFrame({
         # use entity column as the index
         'Entity': df_entity_apd_total['Entity'],
-        'APL_to_APD': round(df_entity_apd_total['Total_Approved']*100 / df_entity_apl_total['Total_Applied'], 2) if df_entity_apl_total['Total_Applied'] != 0 else 0
+        'APL_to_APD': round(df_entity_apd_total['Total_Approved']*100 / df_entity_apl_total['Total_Applied'], 2)
     })
+
+    # Replace any inf or NaN values with 0, in case of division by zero
+    apl_to_apd['APL_to_APD'] = apl_to_apd['APL_to_APD'].replace([float('inf'), float('nan')], 0)
 
     fig_apl_to_apd = px.bar(apl_to_apd, x='Entity', y='APL_to_APD', title='📊 Applied to Approved Ratio by Entity', labels={
                             'Entity': 'Entity', 'APL_to_APD': '%Applied to Approved'}, color='Entity')
