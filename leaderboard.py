@@ -360,7 +360,8 @@ def display_leaderboard_table(df):
 # Replace with your image URL_image_pa
 
 # exchange marathon logo
-icon_path = 'https://lh3.googleusercontent.com/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1'
+# icon_path = 'https://lh3.googleusercontent.com/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1'
+icon_path = 'https://lh3.googleusercontent.com/d/1u9YOAAdZNuUJtCFw5ZEBncncQbE95rzw'
 mascot_image = 'https://lh3.googleusercontent.com/d/1undYpxuWYWLP3A0uH1XvUJRCnNIkXpod'
 favicon_path = 'https://lh3.googleusercontent.com/d/1Fide8c8sEd6-SLiA_bS3lVr93OOCw9Mw'
 gta_image_path = "https://lh3.googleusercontent.com/d/1KP_HuRqFjffWIEZsOHqrGh4l7r0YApTv"
