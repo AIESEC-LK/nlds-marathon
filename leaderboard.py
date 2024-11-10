@@ -250,7 +250,7 @@ def applied_to_approved_ratio_bar_chart_and_data(df_entity_apd_total, df_entity_
 
 
     fig_apl_to_apd = px.bar(apl_to_apd, x='Entity', y='APL_to_APD', title='📊 Applied to Approved Ratio by Entity', labels={
-                            'Entity': 'Entity', 'APL_to_APD': 'Approvals'}, color='Entity')
+                            'Entity': 'Entity', 'APL_to_APD': '%Applied to Approved'}, color='Entity')
 
     fig_apl_to_apd.update_layout(
         title_font=dict(size=20, color="#31333F"),  # Title font size
@@ -329,7 +329,7 @@ def display_leaderboard_table(df):
         'Total': 'OPS Score',
         'Total_Approved': 'Total Approvals',
         'Total_Applied': 'Total Applications',
-        'APL_to_APD': 'Applied to Approved Ratio'
+        'APL_to_APD': 'Applied to Approved Ratio %'
     }, inplace=True)
 
     # Ensure the Rank column is included and set as the index
