@@ -361,6 +361,7 @@ def display_leaderboard_table(df):
 
 # exchange marathon logo
 icon_path = 'https://lh3.googleusercontent.com/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1'
+mascot_image = 'https://lh3.googleusercontent.com/d/1undYpxuWYWLP3A0uH1XvUJRCnNIkXpod'
 favicon_path = 'https://lh3.googleusercontent.com/d/1Fide8c8sEd6-SLiA_bS3lVr93OOCw9Mw'
 gta_image_path = "https://lh3.googleusercontent.com/d/1KP_HuRqFjffWIEZsOHqrGh4l7r0YApTv"
 gte_image_path = 'https://lh3.googleusercontent.com/d/1pO8mI2dVEqNBHWXhz_hNP7gllVDkQfND'
@@ -392,11 +393,13 @@ def main():
     # The Dashboard Title (You can change here)
     # st.title("Transcend Hackathon - Dashboard")
 
-    col1, col2 = st.columns([2, 14, 2])
+    col1, col2, col22 = st.columns([2, 14, 2])
     with col1:
         st.image(icon_path)
     with col2:
         st.title("Winter Exchange Marathon - Dashboard")
+    with col22:
+        st.image(mascot_image)
 
     st.markdown(
         "<hr style='border: 1px solid #000; width: 100%;'>",
