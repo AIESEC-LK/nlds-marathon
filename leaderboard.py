@@ -362,8 +362,8 @@ def display_leaderboard_table(df):
 
 # icon_path = 'https://lh3.googleusercontent.com/d/10OFT6dqjwt3eU05326__4rcclk7Siyon'
 
-icon_path = 'https://drive.google.com/file/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1/view?usp=sharing'
-icon_path = '/X_marathon_logo.png'
+icon_path = 'https://photos.app.goo.gl/PTbSqsYCWXKWEaoh9'
+# icon_path = '/X_marathon_logo.png'
 gta_image_path = "https://lh3.googleusercontent.com/d/1KP_HuRqFjffWIEZsOHqrGh4l7r0YApTv"
 gte_image_path = 'https://lh3.googleusercontent.com/d/1pO8mI2dVEqNBHWXhz_hNP7gllVDkQfND'
 gv_image_path = "https://lh3.googleusercontent.com/d/1P_mg-0qWhpPp2bs9_XlgDru_YA3bjvSi"
