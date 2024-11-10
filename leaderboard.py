@@ -245,7 +245,7 @@ def applied_to_approved_ratio_bar_chart_and_data(df_entity_apd_total, df_entity_
 
     apl_to_apd = pd.DataFrame({
         'Entity': df_entity_apd_total['Entity'], # use entity column as the index
-        'APL_to_APD': df_entity_apd_total['Total_Approved']*100 / df_entity_apl_total['Total_Applied']  
+        'APL_to_APD': round(df_entity_apd_total['Total_Approved']*100 / df_entity_apl_total['Total_Applied'],2)  
     })
 
 
@@ -361,8 +361,6 @@ def display_leaderboard_table(df):
 
 
 # icon_path = 'https://lh3.googleusercontent.com/d/10OFT6dqjwt3eU05326__4rcclk7Siyon'
-# rocket_image_path = 'https://lh3.googleusercontent.com/d/1hGj6HjOQbu-oDwl_1wFJxJnf3zoB4UYz'
-
 
 icon_path = 'https://drive.google.com/file/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1/view?usp=sharing'
 gta_image_path = "https://lh3.googleusercontent.com/d/1KP_HuRqFjffWIEZsOHqrGh4l7r0YApTv"
