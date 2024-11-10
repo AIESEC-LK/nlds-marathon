@@ -239,15 +239,16 @@ def approved_bar_chart_and_data(data):
 
     return fig_approved, df_entity_approved_total
 
+
 def applied_to_approved_ratio_bar_chart_and_data(df_entity_apd_total, df_entity_apl_total):
     # calculate the ratio of applied to approved (APD/APL)
     # divide the pd.dataframe of total approved by total applied
 
     apl_to_apd = pd.DataFrame({
-        'Entity': df_entity_apd_total['Entity'], # use entity column as the index
-        'APL_to_APD': round(df_entity_apd_total['Total_Approved']*100 / df_entity_apl_total['Total_Applied'],2)  
+        # use entity column as the index
+        'Entity': df_entity_apd_total['Entity'],
+        'APL_to_APD': round(df_entity_apd_total['Total_Approved']*100 / df_entity_apl_total['Total_Applied'], 2)
     })
-
 
     fig_apl_to_apd = px.bar(apl_to_apd, x='Entity', y='APL_to_APD', title='📊 Applied to Approved Ratio by Entity', labels={
                             'Entity': 'Entity', 'APL_to_APD': '%Applied to Approved'}, color='Entity')
@@ -264,6 +265,7 @@ def applied_to_approved_ratio_bar_chart_and_data(df_entity_apd_total, df_entity_
     )
 
     return fig_apl_to_apd, apl_to_apd
+
 
 def total_points(data):
     entity_points_total = calulate_total_points(data)
@@ -359,6 +361,7 @@ def display_leaderboard_table(df):
 # Functional Image Rendaring
 # Replace with your image URL_image_pa
 
+
 # exchange marathon logo
 # icon_path = 'https://lh3.googleusercontent.com/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1' #original
 # icon_path = 'https://lh3.googleusercontent.com/d/1u9YOAAdZNuUJtCFw5ZEBncncQbE95rzw'
@@ -401,13 +404,13 @@ def main():
     with col2:
         # st.title("Winter Exchange Marathon - Dashboard")
         st.markdown(
-                    "<div style='text-align: center;'>"
-                    f"<h1>Winter Exchange Marathon - Dashboard</h1>"
-                    # f"<p style='font-size: 32px;'>{
-                    #     df_entity_applied_total['Total_Applied'].sum()}</p>"
-                    "</div>",
-                    unsafe_allow_html=True,
-                )
+            "<div style='text-align: center;'>"
+            f"<br/><h1>Winter Exchange Marathon - Dashboard</h1>"
+            # f"<p style='font-size: 32px;'>{
+            #     df_entity_applied_total['Total_Applied'].sum()}</p>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
     with col22:
         st.image(mascot_image)
 
@@ -431,9 +434,12 @@ def main():
         if 'Entity' in data.columns:
 
             # calculation of leaderboard items
-            fig_applied, df_entity_applied_total = applied_bar_chart_and_data(data)
-            fig_approved, df_entity_approved_total = approved_bar_chart_and_data(data)
-            fig_apltoapd, df_entity_apltoapd_total = applied_to_approved_ratio_bar_chart_and_data(df_entity_approved_total, df_entity_applied_total)
+            fig_applied, df_entity_applied_total = applied_bar_chart_and_data(
+                data)
+            fig_approved, df_entity_approved_total = approved_bar_chart_and_data(
+                data)
+            fig_apltoapd, df_entity_apltoapd_total = applied_to_approved_ratio_bar_chart_and_data(
+                df_entity_approved_total, df_entity_applied_total)
             df_ranks = total_points(data)
 
             df_combined = df_entity_applied_total.merge(
@@ -470,11 +476,10 @@ def main():
                     "<div style='text-align: center;'>"
                     f"<h3>📊 Overall Applied to Approved Coversion Rate</h3>"
                     f"<p style='font-size: 32px;'>{
-                        round(df_entity_approved_total['Total_Approved'].sum()/df_entity_applied_total['Total_Applied'].sum(),2)} % </p>"
+                        round(df_entity_approved_total['Total_Approved'].sum()/df_entity_applied_total['Total_Applied'].sum(), 2)} % </p>"
                     "</div>",
                     unsafe_allow_html=True,
                 )
-                
 
             st.subheader('🔥Leaderboard')
 
@@ -482,7 +487,7 @@ def main():
             display_leaderboard_table(df_combined)
 
             st.divider()
-            
+
             col4, col5 = st.columns([1, 1])
 
             # applied bar chart
@@ -493,7 +498,7 @@ def main():
             with col5:
                 st.plotly_chart(fig_approved, use_container_width=True)
 
-            col77_, col7, col7_ = st.columns([1,2,1])
+            col77_, col7, col7_ = st.columns([1, 2, 1])
 
             # applied to approved ratio bar chart
             with col7:
@@ -578,9 +583,8 @@ def main():
             with col6:
                 st.plotly_chart(fig_2, use_container_width=True)
 
-            
-            col13, col14, col15 = st.columns([1,2,1])
-            
+            col13, col14, col15 = st.columns([1, 2, 1])
+
             with col14:
                 st.plotly_chart(fig_3, use_container_width=True)
 
