@@ -251,7 +251,8 @@ def applied_to_approved_ratio_bar_chart_and_data(df_entity_apd_total, df_entity_
     })
 
     # Replace any inf or NaN values with 0, in case of division by zero
-    apl_to_apd['APL_to_APD'] = apl_to_apd['APL_to_APD'].replace([float('inf'), float('nan')], 0)
+    apl_to_apd['APL_to_APD'] = apl_to_apd['APL_to_APD'].replace(
+        [float('inf'), float('nan')], 0)
 
     fig_apl_to_apd = px.bar(apl_to_apd, x='Entity', y='APL_to_APD', title='📊 Applied to Approved Ratio by Entity', labels={
                             'Entity': 'Entity', 'APL_to_APD': '%Applied to Approved'}, color='Entity')
@@ -364,6 +365,7 @@ def display_leaderboard_table(df):
 # Functional Image Rendaring
 # Replace with your image URL_image_path
 
+
 # exchange marathon logo
 icon_path = 'https://lh3.googleusercontent.com/d/19KFA_FrnUb8UVj06EyfhFXdeDa6vVVui'
 mascot_image = 'https://lh3.googleusercontent.com/d/1undYpxuWYWLP3A0uH1XvUJRCnNIkXpod'
@@ -371,6 +373,8 @@ favicon_path = 'https://lh3.googleusercontent.com/d/1Fide8c8sEd6-SLiA_bS3lVr93OO
 gta_image_path = "https://lh3.googleusercontent.com/d/1KP_HuRqFjffWIEZsOHqrGh4l7r0YApTv"
 gte_image_path = 'https://lh3.googleusercontent.com/d/1pO8mI2dVEqNBHWXhz_hNP7gllVDkQfND'
 gv_image_path = "https://lh3.googleusercontent.com/d/1P_mg-0qWhpPp2bs9_XlgDru_YA3bjvSi"
+
+title_image_path = "https://lh3.googleusercontent.com/d/1OX9pwimdYXg0yLWBDwmCDtv1DgkoZYKo"
 
 
 def functional_image_rendering(function):
@@ -395,24 +399,9 @@ def main():
         page_icon=favicon_path,
     )
 
-    # The Dashboard Title (You can change here)
-    # st.title("Transcend Hackathon - Dashboard")
-
-    col1, col1_, col2, col22 = st.columns([3, 1, 14, 4])
-    with col1:
-        st.image(icon_path)
-    with col2:
-        # st.title("Winter Exchange Marathon - Dashboard")
-        st.markdown(
-            "<div style='text-align: center;'>"
-            f"<br/><h1>Winter Exchange Marathon Dashboard</h1>"
-            # f"<p style='font-size: 32px;'>{
-            #     df_entity_applied_total['Total_Applied'].sum()}</p>"
-            "</div>",
-            unsafe_allow_html=True,
-        )
-    with col22:
-        st.image(mascot_image)
+    col100, col101, col102 = st.columns([1, 5, 1])
+    with col101:
+        st.image(title_image_path, use_column_width=True)
 
     st.markdown(
         "<hr style='border: 1px solid #000; width: 100%;'>",
@@ -420,7 +409,7 @@ def main():
     )
 
     # Set interval to 5 minutes
-    st_autorefresh(interval=1 * 60 * 1000, key="data_refresh")
+    st_autorefresh(interval=5 * 60 * 1000, key="data_refresh")
     # URL to your Google Sheets data
     # Datasource url / Google Sheets CSV
     sheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1oLfepAJoK2NEU3rdYh2RPEUVW3Gk3Rmnj6GQ4oxDB4TI-RR5Zttx3cftpccg3YcyeNW4XUer_YQb/pub?gid=0&single=true&output=csv"
@@ -451,7 +440,8 @@ def main():
             total_applied = df_entity_applied_total['Total_Applied'].sum()
 
             # Calculate the conversion rate, with a check for division by zero
-            conversion_rate = round(total_approved / total_applied, 2) if total_applied != 0 else 0
+            conversion_rate = round(
+                total_approved / total_applied, 2) if total_applied != 0 else 0
 
             # Define a layout with two columns
             col1, col2, col3 = st.columns([1, 1, 1])
