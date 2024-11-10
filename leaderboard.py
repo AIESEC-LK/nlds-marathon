@@ -114,7 +114,6 @@ def count_applied_to_approved_ratio(df, selected_function):
         columns={'%APL-APD': 'Applied_to_Approved_Ratio'}, inplace=True)
     return applied_to_approved_ratio
 
-icon_path = 'https://lh3.googleusercontent.com/d/19CS85s1g6wqAdHJ-JBL_nEoaE1rzgK9C'
 
 def calculate_approval_ranks(df):
     # Sort the DataFrame by 'Total_Approved' column in descending order
@@ -303,6 +302,9 @@ def display_leaderboard_table(df):
     # Display the HTML table
     st.markdown(html_table, unsafe_allow_html=True)
 # Main Streamlit app
+
+# icon_path = 'https://lh3.googleusercontent.com/d/19CS85s1g6wqAdHJ-JBL_nEoaE1rzgK9C'
+icon_path = 'https://drive.google.com/file/d/1Kr14ppMbkS93MEw7PISbt1gixYCBsU_1/view?usp=sharing'
 
 
 def main():
