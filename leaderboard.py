@@ -242,11 +242,10 @@ def approved_bar_chart_and_data(data):
 def applied_to_approved_ratio_bar_chart_and_data(df_entity_apd_total, df_entity_apl_total):
     # calculate the ratio of applied to approved (APD/APL)
     # divide the pd.dataframe of total approved by total applied
-    # apl_to_apd['Ratio'] = df_entity_apd_total['Total_Approved'].div(df_entity_apl_total['Total_Applied'], fill_value=0)  # fill_value avoids division by zero in missing values
 
     apl_to_apd = pd.DataFrame({
-        'Entity': df_entity_apd_total['A'],  # Keep column A from df1
-        'APL_to_APD': df_entity_apd_total['Total_Approved'] / df_entity_apl_total['Total_Applied']  # Divide B from df1 by C from df2
+        'Entity': df_entity_apd_total['Entity'], # use entity column as the index
+        'APL_to_APD': df_entity_apd_total['Total_Approved'] / df_entity_apl_total['Total_Applied']  
     })
 
 
