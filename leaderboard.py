@@ -239,6 +239,32 @@ def approved_bar_chart_and_data(data):
 
     return fig_approved, df_entity_approved_total
 
+def applied_to_approved_ratio_bar_chart_and_data(df_entity_apd_total, df_entity_apl_total):
+    # calculate the ratio of applied to approved (APD/APL)
+    # divide the pd.dataframe of total approved by total applied
+    # apl_to_apd['Ratio'] = df_entity_apd_total['Total_Approved'].div(df_entity_apl_total['Total_Applied'], fill_value=0)  # fill_value avoids division by zero in missing values
+
+    apl_to_apd = pd.DataFrame({
+        'Entity': df_entity_apd_total['A'],  # Keep column A from df1
+        'APL_to_APD': df_entity_apd_total['Total_Approved'] / df_entity_apl_total['Total_Applied']  # Divide B from df1 by C from df2
+    })
+
+
+    fig_apl_to_apd = px.bar(apl_to_apd, x='Entity', y=apl_to_apd, title='📊 Applied to Approved Ratio by Entity', labels={
+                            'Entity': 'Entity', 'Total_Approved': 'Approvals'}, color='Entity')
+
+    fig_apl_to_apd.update_layout(
+        title_font=dict(size=20, color="#31333F"),  # Title font size
+        # X-axis title font size
+        xaxis_title_font=dict(size=16, color="#31333F"),
+        # Y-axis title font size
+        yaxis_title_font=dict(size=16, color="#31333F"),
+        xaxis_tickfont=dict(size=14, color="#31333F"),  # X-axis tick font size
+        yaxis_tickfont=dict(size=14, color="#31333F"),  # Y-axis tick font size
+        showlegend=False
+    )
+
+    return fig_apl_to_apd, apl_to_apd
 
 def total_points(data):
     entity_points_total = calulate_total_points(data)
@@ -303,7 +329,8 @@ def display_leaderboard_table(df):
     df_with_ranks.rename(columns={
         'Total': 'OPS Score',
         'Total_Approved': 'Total Approvals',
-        'Total_Applied': 'Total Applications'
+        'Total_Applied': 'Total Applications',
+        'APL_to_APD': 'Applied to Approved Ratio'
     }, inplace=True)
 
     # Ensure the Rank column is included and set as the index
@@ -312,7 +339,7 @@ def display_leaderboard_table(df):
     # Specify the order of columns explicitly
     # Make sure that the columns listed here match your DataFrame
     columns_order = ['Rank', 'Entity', 'OPS Score',
-                     'Total Approvals', 'Total Applications']
+                     'Total Applications', 'Total Approvals', 'Applied to Approved Ratio']
 
     # Check if all specified columns exist in the DataFrame
     for col in columns_order:
@@ -395,33 +422,22 @@ def main():
         if 'Entity' in data.columns:
 
             # calculation of leaderboard items
-            fig_applied, df_entity_applied_total = applied_bar_chart_and_data(
-                data)
-            fig_approved, df_entity_approved_total = approved_bar_chart_and_data(
-                data)
+            fig_applied, df_entity_applied_total = applied_bar_chart_and_data(data)
+            fig_approved, df_entity_approved_total = approved_bar_chart_and_data(data)
+            fig_apltoapd, df_entity_apltoapd_total = applied_to_approved_ratio_bar_chart_and_data(df_entity_approved_total, df_entity_applied_total)
             df_ranks = total_points(data)
 
             # df_combined = pd.concat(df_ranks, df_entity_applied_total, df_entity_approved_total, on='Entity')
             # df_combined = df_ranks.merge(df_entity_applied_total, on='Entity').merge(df_entity_approved_total, on='Entity')
             df_combined = df_entity_applied_total.merge(
-                df_entity_approved_total, on='Entity').merge(df_ranks, on='Entity')
+                df_entity_approved_total, on='Entity').merge(
+                    df_entity_apltoapd_total, on='Entity').merge(df_ranks, on='Entity')
 
             # Define a layout with two columns
-            col1, col2 = st.columns([1, 1])
+            col1, col2, col3 = st.columns([1, 1, 1])
 
             # Display the total approvals in the first column
             with col1:
-                st.markdown(
-                    "<div style='text-align: center;'>"
-                    f"<h3>✅ Total Approvals</h3>"
-                    f"<p style='font-size: 32px;'>{
-                        df_entity_approved_total['Total_Approved'].sum()}</p>"
-                    "</div>",
-                    unsafe_allow_html=True,
-                )
-
-            # Display the leaderboard in the second column
-            with col2:
                 st.markdown(
                     "<div style='text-align: center;'>"
                     f"<h3>🌍 Total Applications</h3>"
@@ -431,24 +447,50 @@ def main():
                     unsafe_allow_html=True,
                 )
 
+            # Display the leaderboard in the second column
+            with col2:
+                st.markdown(
+                    "<div style='text-align: center;'>"
+                    f"<h3>✅ Total Approvals</h3>"
+                    f"<p style='font-size: 32px;'>{
+                        df_entity_approved_total['Total_Approved'].sum()}</p>"
+                    "</div>",
+                    unsafe_allow_html=True,
+                )
+
+            with col3:
+                st.markdown(
+                    "<div style='text-align: center;'>"
+                    f"<h3>📊 Overall Applied to Approved Coversion Rate</h3>"
+                    f"<p style='font-size: 32px;'>{
+                        df_entity_approved_total['Total_Approved'].sum()/df_entity_applied_total['Total_Applied'].sum()}</p>"
+                    "</div>",
+                    unsafe_allow_html=True,
+                )
+                
+
             st.subheader('🔥Leaderboard')
 
             # Display the leaderboard table
-
-            # col7, col8 = st.columns([3, 1])
-
-            # with col8:
-            # st.image(rocket_image_path)
-
-            # with col7:
             display_leaderboard_table(df_combined)
 
+            st.divider()
+            
             col4, col5 = st.columns([1, 1])
+
+            # applied bar chart
             with col4:
+                st.plotly_chart(fig_applied, use_container_width=True)
+
+            # approved bar chart
+            with col5:
                 st.plotly_chart(fig_approved, use_container_width=True)
 
-            with col5:
-                st.plotly_chart(fig_applied, use_container_width=True)
+            col77_, col7, col7_ = st.columns([1,2,1])
+
+            # applied to approved ratio bar chart
+            with col7:
+                st.plotly_chart(fig_apltoapd, use_container_width=True)
 
             ###############################################################################
 
@@ -529,12 +571,6 @@ def main():
             with col6:
                 st.plotly_chart(fig_2, use_container_width=True)
 
-            # col9, col10 = st.columns([1, 2])
-
-            # with col9:
-                # functional_image_rendering(selected_function)
-
-            # with col10:
             
             col13, col14, col15 = st.columns([1,2,1])
             
