@@ -397,7 +397,15 @@ def main():
     with col1:
         st.image(icon_path)
     with col2:
-        st.title("Winter Exchange Marathon - Dashboard")
+        # st.title("Winter Exchange Marathon - Dashboard")
+        st.markdown(
+                    "<div style='text-align: center;'>"
+                    f"<h2>Winter Exchange Marathon - Dashboard</h2>"
+                    # f"<p style='font-size: 32px;'>{
+                    #     df_entity_applied_total['Total_Applied'].sum()}</p>"
+                    "</div>",
+                    unsafe_allow_html=True,
+                )
     with col22:
         st.image(mascot_image)
 
