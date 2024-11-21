@@ -1,4 +1,4 @@
-# Exhchange Marathon - Data Visualization Dashboard
+# Exchange Marathon - Data Visualization Dashboard
 
 Welcome to our Exchange Marathon Dashboard! This dashboard allows you to visualize data extracted from EXPA using the EXPA API in real-time. Here's how you can set it up and get started:
 
