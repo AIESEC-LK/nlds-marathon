@@ -13,7 +13,8 @@ const entitiesList = [
     { id: 2188, name: 'SLIIT' },
     { id: 2186, name: 'NSBM' },
     { id: 4535, name: 'NIBM' },
-    { id: 5490, name: 'Rajarata' }
+    { id: 5490, name: 'Rajarata' },
+    { id: 6710, name: 'Wayamba' }
 ];
 
 
